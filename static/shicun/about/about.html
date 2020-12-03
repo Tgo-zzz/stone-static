@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>about</title>
+</head>
+<script src="../userEntry/js/init.js"></script>
+<style>
+  * {
+    margin: 0;
+    padding: 0
+  }
+  body{
+    background-color: rgb(36, 36, 36)
+  }
+  body{
+    transition: all 0.5s
+  }
+  @font-face {
+    font-family: 'scfzxfxs';
+    src: url("./font/about.woff");
+  }
+
+  .about {
+    float: left;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+  .about.center{
+    position: relative;
+  }
+  .about h1 {
+    font-size: 60px;
+    font-family: 'scfzxfxs';
+    font-weight: 100
+  }
+
+  .aboutTitle-left {
+    float: right;
+    margin: 100px 10px 20px 0;
+    color: whitesmoke
+  }
+
+  .aboutTitle-right {
+    margin: 100px 0 20px 0;
+    color: #87816B
+  }
+
+  .aboutText {
+    transform: translateX(-120px);
+    width: 300px;
+    letter-spacing: 7px;
+    font-size: 17px;
+  }
+  .aboutText::after{
+    content: "";
+    position: absolute;
+    width: 78px;
+    height: 94px;
+    left: 78px;
+    bottom: -75px;
+    background: url("./img/about1.png") center center no-repeat;
+    background-size: 70% 70%;
+    transform: rotateZ(-7deg)
+  }
+  .aboutToMain{
+    display: block;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    padding-right: 120px;
+    position: absolute;
+    border-radius: 5px;
+    right: 0;
+    transform: translate(200px,-220px)
+  }
+  .aboutToMain a{
+    font-family: 'scfzxfxs';
+    font-size: 80px;
+    font-weight: 100;
+    color: whitesmoke;
+    text-decoration: none;
+  }
+  .aboutToMain a::after{
+    content: "";
+    display: inline;
+    position: absolute;
+    background: no-repeat url("./img/go.png") center center;
+    background-size: 80% 70%;
+    transform: translateY(-7px);
+    width: 100px;
+    height: 100px;
+  }
+  .aboutToMain a:hover{
+    opacity: 0.7;
+  }
+  @media screen and (min-width: 960px) {
+    .about.left {
+      width: 15%;
+      background-color: #87816B
+    }
+
+    .about.center {
+      width: 55%;
+      background-image: url("./img/about_center.png")
+    }
+
+    .about.right {
+      width: 30%;
+      background-image: url("./img/about_right.png")
+    }
+  }
+  @media screen and (max-width: 960px) {
+    .about.left {
+      width: 40%;
+      background-color: #87816B
+    }
+
+    .about.center {
+      width: 60%;
+      background-image: url("./img/about_center.png")
+    }
+
+    .about.right {
+      width: 0%;
+    }
+    .aboutTitle-left{
+      margin-right: 0
+    }
+  }
+</style>
+
+<body>
+  <div class="about left">
+    <h1 class="aboutTitle-left">&#30707;村</h1>
+  </div>
+  <div class="about center">
+    <h1 class="aboutTitle-right">简介</h1>
+    <p class="aboutText">
+      许家山位于山顶，周围都是山地，植被保护得很好，草木茂盛，古枫参天，翠竹亭亭，石景幽幽，炊烟袅袅，环境清静，走进许家山仿佛走进一个世外桃源，许家山最大的特点是原始、荒野之美，房屋很少用钢筋水泥等现代材料。全村绝大部分都是石屋，石屋的墙体材料用黑色玄武岩堆垒而成。许家山是宁波市内现有保存最完整的石屋古村，也是浙东沿海山地石屋建筑群落的典范,堪称石头王国。
+    </p>
+    <h1 class="aboutToMain"> <a id="go" href="#">石村风情</a> </h1>
+  </div>
+  <div class="about right">
+  </div>
+</body>
+<script>
+  document.getElementById("go").addEventListener("click",function(e){
+    document.getElementsByTagName("body")[0].style.transform = "translateX( -100% )"
+    setTimeout(() => {
+      e.target.href = "../main/main.html"
+      e.target.click();
+    }, 500);
+  })
+</script>
+
+</html>

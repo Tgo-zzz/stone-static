@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>fullView</title>
+  <link rel="stylesheet" href="./src/nav.css">
+</head>
+<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="./node_modules/three/build/three.js"></script>
+<script src="./node_modules/three/examples/js/controls/OrbitControls.js"></script>
+<script src="../userEntry/js/init.js"></script>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+    overflow: hidden;
+    outline: medium;
+  }
+</style>
+
+<body>
+  <div id="map" style="padding: 20px">
+    <span id="map_icon"></span>
+    <img class="mapImg" style="height: 100%;width:100%; display: none" src="./src/img/map1.png" alt="map">
+    <img class="mapImg" style="height: 100%;width:100%; display: none" src="./src/img/map2.png" alt="map">
+    <img class="mapImg" style="height: 100%;width:100%; display: none" src="./src/img/map3.png" alt="map">
+    <img class="mapImg" style="height: 100%;width:100%; display: none" src="./src/img/map4.png" alt="map">
+  </div>
+  <audio id="bgm" src="./src/bgm.mp3" controls autoplay loop></audio>
+  <div id="menu" tabindex="1">
+    <ul id="menu-list">
+      <li class="btn" id="btn-music" title="声音" ></li>
+      <li class="btn" id="btn-map" title="地图" ></li>
+      <li class="btn" id="btn-photo" title="截屏" ></li>
+      <li class="btn" id="btn-nav" title="图片导航"></li>
+      <a href="../main/main.html"><li class="btn" id="btn-quit" title="退出"></li></a>
+    </ul>
+  </div>
+  <div id="fullView">
+  </div>
+  <div class="nav" id="nav">
+    <ul id="pathway">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <div class="nav" id="nav_btn1"></div>
+    <div class="nav" id="nav_btn2"></div>
+    <!-- <div class="nav" id="nav_meng"></div> -->
+  </div>
+
+</body>
+<script>
+
+</script>
+<script src="./src/init.js"></script>
+<script src="./src/index.js"></script>
+<script src="./src/nav.js"></script>
+<script>
+  
+</script>
+</html>

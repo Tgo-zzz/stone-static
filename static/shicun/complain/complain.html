@@ -1,0 +1,85 @@
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+	<meta charset="utf-8" />
+
+	<title>投诉与建议</title>
+	<link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="../Public_Assets/css/sideNav.css">
+
+	<!--[if IE]><script>
+
+	$(document).ready(function() { 
+	$("#form_wrap").addClass('hide');
+
+	})
+</script><![endif]-->
+
+</head>
+
+<body style="margin-top: 60px">
+
+	<div id="wrap">
+
+		<h1>投诉与建议</h1>
+
+		<div id='form_wrap'>
+
+			<form>
+
+				<p>Hello XXXX,</p>
+
+				<label for="email">您的留言 : </label>
+
+				<textarea  name="message" value="Your Message" id="message" ></textarea>
+
+				<p>附件</p>	
+
+				<label for="name">选取 </label>
+
+				<input type="file" name="name" value="" id="name" />
+
+        <br>
+        <br>
+        <br>
+
+				<input type="submit" name ="submit" value="点这儿提交哦 &nbsp; 😙" />
+
+			</form>
+
+		</div>
+
+	</div>
+	<aside style="transform: translateX( 208px )" class="stone-side right">
+    <button class="btn-side fewer ">
+      <span class="hamb-top"></span>
+      <span class="hamb-middle"></span>
+      <span class="hamb-bottom"></span>
+    </button>
+    <nav class="stone-nav">
+      <ul class="stone-nav-list">
+        <li><a id="home" href="../home/home.html">石村</a></li>
+        <li><a id="user" href="../userEntry/login.html">登陆/注册</a></li>
+        <li><a id="main" href="../about/about.html">简介</a></li>
+        <li><a id="stone" href="../stone/stone.html">石头</a></li>
+        <li><a id="main_part" href="../main-part/main_part.html">石村风情</a></li>
+        <li><a id="forum" href="../forum/forum.html">论坛</a></li>
+        <li><a id="build" href="../Minecraft/index.html">我的石村</a></li>
+        <li><a id="help" href="../complain/complain.html">投诉与建议</a></li>
+      </ul>
+    </nav>
+  </aside>
+	<iframe id="entry" style="position: fixed;width: 100vw;height: 100vh;top: 0;left: 0;visibility: hidden" src="../userEntry/login.html" frameborder="0"></iframe>
+<div style="position:fixed;height:90px;width:100%;left:0;bottom:10px"><div class="footer-banner" style="width:728px; margin:0px auto"></div></div>
+
+<!-- <script src="http://www.jq22.com/jquery/1.7.2/jquery.min.js"></script> -->
+<script src="../Public_Assets/js/jquery.min.js"></script>
+<script src="../Public_Assets/js/home.js"></script>
+</body>
+
+</html>

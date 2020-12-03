@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>天空盒贴图</title>
+    <script type="text/javascript" src="./node_modules/three/build/three.js"></script>
+    <script type="text/javascript" src="./node_modules/three/examples/js/controls/OrbitControls.js"></script>
+    <script type="text/javascript" src="./node_modules/three/examples/js/libs/stats.min.js"></script>
+    <style>
+        body {
+            margin: 0px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript" >
+        let container1 = document.createElement('div');
+        document.body.appendChild(container1);
+ 
+        let container2 = document.createElement('div');
+        document.body.appendChild(container2);
+ 
+        let scene = undefined;
+        let renderer = undefined;
+        let camera = undefined;
+        let pointLight = ambientLight = undefined;
+        let controls = undefined;
+        let stats = undefined;
+ 
+        main();
+        render();
+ 
+        function main() {
+            initScene();
+            initRenderer(container1);
+            initCamera();
+            initLight();
+            textureBox();
+            initControls();
+            initStats(container2);
+            window.addEventListener('resize', onWindowResize, false);
+        }
+ 
+        function initScene() {
+            scene = new THREE.Scene();
+            scene.background = new THREE.CubeTextureLoader()
+                .setPath('./src/img/panorama/').load(
+                    [
+                        'IMG_20190816_151933_00_merged_l.png',
+                        'IMG_20190816_151933_00_merged_l.png',
+                        'IMG_20190816_151933_00_merged_l.png',
+                        'IMG_20190816_151933_00_merged_l.png',
+                        'IMG_20190816_151933_00_merged_l.png',
+                        'IMG_20190816_151933_00_merged_l.png'
+                    ],function(){
+                      console.log(scene)
+                    }
+                );
+ 
+        }
+ 
+        function initCamera() {
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(10, 0, 10);
+            camera.lookAt(new THREE.Vector3(0, 0, 0));
+        }
+ 
+        function initRenderer(container1) {
+            renderer = new THREE.WebGLRenderer({antialias:true});
+            renderer.setClearColor(0xffffff, 1.0);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container1.appendChild(renderer.domElement);
+        }
+ 
+        function initLight() {
+            ambientLight = new THREE.AmbientLight(0xffffff, 0.35);
+            scene.add(ambientLight);
+ 
+            pointLight = new THREE.PointLight(0xffffff);
+            pointLight.position.set(10, 10, 10);
+            scene.add(pointLight);
+        }
+ 
+        function initControls() {
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.autoRotate = false;
+            controls.enableKeys = true;
+        }
+ 
+        function textureBox() {
+            let geometry = new THREE.BoxGeometry(3, 3, 3, 30, 30, 30);
+            let map = new THREE.TextureLoader().load('textures/brick_bump.jpg');
+            let material = new THREE.MeshPhongMaterial({map:map});
+            let box = new THREE.Mesh(geometry, material);
+ 
+            scene.add(box);
+        }
+ 
+        function initStats(container2) {
+            stats = new Stats();
+            stats.setMode(0);
+ 
+            stats.domElement.style.position = 'absolute';
+            stats.domElement.style.left = '0px';
+            stats.domElement.style.top = '0px';
+ 
+            container2.appendChild(stats.domElement);
+        }
+ 
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize( window.innerWidth, window.innerHeight);
+        }
+ 
+        function render() {
+            controls.update();
+            stats.update();
+            requestAnimationFrame(render);
+            renderer.render(scene, camera);
+        }
+ 
+    </script>
+ 
+ 
+</body>

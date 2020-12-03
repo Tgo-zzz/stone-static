@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>main_part</title>
+</head>
+<script src="../userEntry/js/init.js"></script>
+<style>
+  * {
+    margin: 0;
+    padding: 0
+  }
+
+  @font-face {
+    font-family: 'FZLTCXHJW';
+    src: url("./font/main_part_h1.woff");
+  }
+
+  body {
+    overflow: hidden;
+    /* font-family: 'FZLTCXHJW'; */
+  }
+
+  h1 {
+    font-family: "FZLTCXHJW";
+    font-size: 64px;
+    color: white;
+    font-weight: 100;
+    letter-spacing: 10px
+  }
+
+  .part {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    transition: all 0.5s;
+  }
+
+  .part h1 {
+    position: absolute;
+    z-index: 10;
+  }
+
+  .part.hidden {
+    opacity: 0;
+  }
+
+  .part.left {
+    transform-origin: 30% 50%;
+    transform: scale(0.7,0.7);
+    opacity: 0.5;
+  }
+
+  .part.right {
+    opacity: 0;
+  }
+
+  article {
+    display: block;
+    position: absolute;
+    overflow-y: scroll;
+    z-index: 9;
+    -webkit-scrollbar-button: none;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 4px;
+  }
+
+  .innerbox::-webkit-scrollbar {
+    width: 8px;
+    /*height: 4px;*/
+  }
+
+  .innerbox::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .innerbox::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  ul li {
+    position: relative;
+    list-style: none;
+    /* overflow: hidden; */
+    float: left;
+    background-position: center center;
+    background-size: cover;
+  }
+
+  .part:nth-child(2) {
+    background-color: #BEAF72
+  }
+
+  .part:nth-child(3) {
+    background-color: #766539
+  }
+
+  .part:nth-child(4) .shelf_1 {
+    background-color: #505561
+  }
+
+  .part:nth-child(5) {
+    background-color: #505561
+  }
+
+  .part:nth-child(6) .shelf_1 {
+    background-color: #766539
+  }
+
+  .shelf_0 li:nth-child(1) {
+    width: 30%;
+    height: 100vh;
+    background-color: #BEAF72
+  }
+
+  .shelf_0 li:nth-child(2) {
+    width: 54%;
+    height: 100vh;
+    background-image: url("./img/museum.png")
+  }
+
+  .shelf_0 li:nth-child(3) {
+    width: 16%;
+    height: 100vh;
+    background-color: #766539
+  }
+
+  .shelf_1 li:nth-child(1) {
+    width: 16.5%;
+    height: 100vh;
+  }
+
+  .shelf_1 li:nth-child(2) {
+    width: 54%;
+    height: 100vh;
+  }
+
+  .shelf_1 li:nth-child(3) {
+    width: 29.5%;
+    height: 100vh;
+  }
+
+  .shelf_2 li:nth-child(1) {
+    width: 100%;
+    height: 70vh;
+  }
+
+  .shelf_2 li:nth-child(2) {
+    width: 100%;
+    height: 30vh;
+    background-color: whitesmoke
+  }
+
+  .shelf_3 li:nth-child(1) {
+    width: 43%;
+    height: 100vh;
+  }
+
+  .shelf_3 li:nth-child(2) {
+    width: 41%;
+    height: 100vh;
+    background-color: #505561;
+  }
+
+  .shelf_3 li:nth-child(3) {
+    width: 16%;
+    height: 100vh;
+    background-color: white
+  }
+
+  .shelf_4 li:nth-child(1) {
+    width: 30%;
+    height: 100vh;
+    background-color: #BEAF72
+  }
+
+  .shelf_4 li:nth-child(2) {
+    width: 54%;
+    height: 100vh;
+  }
+
+  .shelf_4 li:nth-child(3) {
+    width: 16%;
+    height: 100vh;
+    background-color: #505561
+  }
+
+  .h_1 {
+    top: 50px;
+    right: calc(16% - 153px)
+  }
+
+  .h_2 {
+    top: 50px;
+    left: calc(16.5% - 69px);
+    color: black
+  }
+
+  .h_3 {
+    top: 50px;
+    left: calc(16.5% - 64px);
+    width: 70px;
+  }
+
+  .h_4 {
+    top: 10px;
+    right: calc(29.5% - 32px);
+    width: 70px;
+  }
+
+  .h_5 {
+    top: 18%;
+    left: 10.5%;
+    padding: 0 20px 10px 20px;
+    border-bottom: whitesmoke 1.5px solid;
+  }
+
+  .h_6 {
+    top: 20px;
+    right: calc(16% - 42px);
+  }
+
+  .h_7 {
+    top: 104px;
+    color: #505561;
+    right: calc(16% - 116px);
+  }
+
+  .h_8 {
+    top: 20%;
+    right: calc(16% - 116px);
+  }
+
+  .text_1 {
+    margin: 30px 0;
+    transform: translateX(30px);
+    width: calc(100% - 60px);
+    height: calc(100% - 120px);
+    background: rgba(255, 255, 255, 0.5);
+    padding: 30px;
+  }
+
+  .text_2 {
+    margin: 50px;
+    margin-top: 30px;
+    width: calc(100% - 180px);
+    height: calc(100% - 190px);
+    background: rgba(255, 255, 255, 0.4);
+    padding: 100px 40px 20px 40px;
+  }
+
+  .text_3 {
+    margin: 50px;
+    padding: 30px;
+    transform: translateX(-50px);
+    right: 0;
+    width: calc(100% - 60px);
+    height: calc(100% - 160px);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 100;
+  }
+
+  .text_4_1 {
+    margin: 50px;
+    padding: 30px;
+    width: calc(100% + 60px);
+    height: calc(100% - 160px);
+    left: 0;
+    font-weight: 100;
+    /* background-color: rgba(255, 255, 255, 0.5); */
+    color: white
+  }
+
+  .text_4_2 {
+    padding: 30px;
+    margin: 200px 50px 50px 50px;
+    width: calc(100% - 60px);
+    height: calc(100% - 310px);
+    right: 0;
+    color: white;
+  }
+
+  .text_5_1 {
+    padding: 30px 60px;
+    width: calc(50% - 120px);
+    height: calc(100% - 60px);
+    left: 0;
+  }
+
+  .text_5_2 {
+    padding: 30px 60px;
+    width: calc(50% - 120px);
+    height: calc(100% - 60px);
+    right: 0;
+  }
+
+  .text_6 {
+    margin: 20px;
+    padding: 30px;
+    margin-top: 200px;
+    width: 300%;
+    height: calc(100% - 280px);
+    right: 30px;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  #shiwu1 {
+    background-image: url("./img/shiwu.png")
+  }
+
+  #shiwu2 {
+    background-image: url("./img/shiwu_2.png")
+  }
+
+  #shichuang1 {
+    background-image: url("./img/shichuang.png")
+  }
+
+  #qiangjiao1 {
+    background-image: url("./img/qiangjiao.png")
+  }
+
+  #shengchu {
+    background-image: url("./img/shengchu.png")
+  }
+
+  #ri {
+    background-image: url("./img/ri.png")
+  }
+
+  #yiyv {
+    background-image: url("./img/yiyv.png")
+  }
+</style>
+
+<body>
+  <section class="part hidden">
+    <a name="blockMuseum"></a>
+    <h1 class="h_1">石头博物馆</h1>
+    <ul class="shelf_0">
+      <li>
+        <article class="text_1 innerbox">&nbsp;&nbsp;&nbsp;&nbsp;宁海许家山石头博物馆于2016年6月8日上午正式开馆。<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;这是许家山引进的首家专题博物馆。馆内展示了由民间收藏家王万忠先生所收藏的上千件奇石藏品。藏品中比较珍贵的有缅甸翡翠原石、灵璧奇石以及各种海洋类生物化石、恐龙蛋化石等。<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;据了解，许家山石头博物馆主题陈列有各地奇石、矿石、藏石文化、石材制品等。陈列分室内及户外两大区块，总面积达800平方米，是公众认知石文化的一个窗口，也是许家山石头村文化的一个展示平台。博物馆的建成为许家山历史文化名村这一绚丽多彩的石头王国添加了厚重一笔。<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          许家山石头博物馆不收费，不过还是要签到登记的。迎门而立的是体型硕大的立石，就是号称“天下第一石”的灵璧石。它产自安徽灵璧县，是喜爱石头者不可或缺的。博物馆里的石头，品类众多，非专业人士，难以识认周全，更不得其详。馆内展示的有：灵璧石、鸮头贝化石、黄蜡石、玄武岩、蛇皮化石、大化石又称彩玉石、火山岩石、恐龙蛋化石、木纹石又名紫檀石、也称木鱼石、树化玉石亦称硅化木、螺化石、红管珊瑚石、菊石化石、肉石也称肉形石、青田石、水冲石、鸡血石等，还有石头宴满汉全席。
+        </article>
+      </li>
+      <li style="z-index: -1"></li>
+      <li></li>
+    </ul>
+  </section>
+  <section class="part hidden">
+    <a name="shiwu"></a>
+    <h1 class="h_2">石屋</h1>
+    <article class="text_2 innerbox">
+      &nbsp;&nbsp;&nbsp;&nbsp;许家山的村道主要有两条，一纵一横，呈“T”形，纵为南北走向，横为东西走向。<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;就像一棵树，这一纵一横就是主干，从主干上分叉出去的，就是巷道的枝叶。<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;许家山的石屋就沿这“T”形密密排列。<br>
+      沿纵向排列的，大都坐西朝东；沿横向排列的，大多坐北朝南。<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;因为许家山所在的山坡是一个缓坡，因此许家山的石屋建筑也是随山势而逐渐升高的。这是否蕴含着古人“步步高升”的寓意？“这里的房屋是随着地势起伏灵活布置的，从东往西、由南往北一排接一排渐次升高，使得每两排石屋之间自然就行程一条条南北、东西走向的巷道，十分有规律”，专家这样认为。<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;许家山的石屋通常分上下两层。下层为厨房、杂物间，楼上为卧室。上下用木楼梯贯连。也有把楼上空余的房子作为杂物间的，大多放置番薯、洋芋等农作物。因为楼上的地板干燥，收获的农作物放在上面不容易腐烂。<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;这些以两层为基本构造的房子，根据经济条件的不同，砌墙的材料也有所不同。条件好一点的，一层的墙体用铜板石砌成，二层为保暖防风，就用当地的黏土烧制的青砖，因为相比之下，砖头的成本比石头要高。条件差一点的，就一石到顶。还有一种情况，就是两边的山墙都是一石到顶的，后墙则是一半是石头，一半是砖头。这全看自家的经济状况了。<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;从许家山石屋的建筑材料来说，石材无疑是主体，占到百分之七八十；只有梁柱、门窗、楼板等处用少量木材。石屋采用穿斗式木结构承重，树木建构基本没有雕刻，也没有油漆，呈现原本的木色。简单的梁柱交接关系，均以榫头为主，凹凸相衔，简单而又牢固，使石屋独具山乡居民原始之美。也有很少一部分居民采用柱头斗拱承托屋架，那就算得上是很讲究的人家了。“整个山村街巷格局保持完整，石屋外墙采用了乱石建造，内部则采用传统建筑穿斗抬架式筑法，梁架用材上特别讲究自然，木材原来什么形状，用在石屋里还是原来的形状，没有特意改变它的弯曲度，给人一种自然美。”，专家说。<br>
+      <!-- &nbsp;&nbsp;&nbsp;&nbsp;因为第十的原因，许家山的房子排列都高低错落、逶迤参差，其间以一条条石头小巷衔接贯通。沿着这小巷走，可以随意走进一户人家；需要去另一户人家，无需原路折返，而是就从这户人家的另一扇们出去，便是另一户人家。有时，从这户人家的厨房出去，过一条石巷，可以进入另一户人家二楼的卧室，又可以进入另一户人家一楼的厨房。走家串户间，常常给你意外的惊喜。<br> -->
+    </article>
+    <ul class="shelf_1">
+      <li></li>
+      <li id="shiwu1">
+        <!--图-->
+      </li>
+      <li id="shiwu2"></li>
+    </ul>
+  </section>
+  <section class="part hidden">
+    <a name="shichuang"></a>
+    <h1 class="h_3">石窗</h1>
+    <ul class="shelf_1">
+      <li></li>
+      <li id="shichuang1">
+        <!--图-->
+      </li>
+      <li id="shichuang2" style="background-color: #505561">
+        <article class="text_3 innerbox">
+          &nbsp;&nbsp;&nbsp;&nbsp;两块稍微大个点的石头被平行放置，中间空出一个长方形，这便是一扇窗户。一楼的窗以石窗为主，用碎石条搭出一些简单的镂空图案。这些漏窗除便于采光通风外，还起到了一定的装饰作用。<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;在许家山，很少看到在同一时期的宁海居民建筑中最常见的雕花石窗，仅有的一两扇，也不是用许家山本地的石材制作的，雕工也较粗糙。这可能与铜板石的石质不适宜雕镂有关。尽管门窗都偏小，但由于进深浅，屋架高，屋里的光线倒不是太暗。二楼的窗户因为关系到挡风和私密，大多用木板制成。许家山石屋的门也以石为主，除了门扇和轴是木制的外，其余都用石头。
+        </article>
+      </li>
+    </ul>
+  </section>
+  <section class="part hidden">
+    <a name="qiangjiao" id="a2"></a>
+    <h1 class="h_4">墙角</h1>
+    <ul class="shelf_1">
+      <li style="background-color:#505561">
+        <article class="text_4_1 innerbox">
+          &nbsp;&nbsp;&nbsp;&nbsp;许家山石屋的墙体大多由石块垒叠而成。那是一块块形状各异的石头，有尖利的三角形、细长的菱形、对称的方形，以及方整的长条形，它们互相契合，紧密地叠在一起，形成一面颇有几何意味的墙面。石块有大有小，参差不一。有些屋子所用的石块就相对较大、较方整，大石块与小石块之间用小石块补缝加固，但都极少用石灰或水泥抿缝，一般也不用石灰或水泥抹面，整面墙体裸露块状或条状的石头，因此风能轻易地透墙而过。<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;许家山石屋的屋顶也与大多数江南民居一样，采用硬山双坡屋顶，一层向外侧推出一进檐廊。一爿爿秀气的小瓦或躬着背，或仰着身子，既各司其职，又互相配合，密密麻麻地排列着。躬着的背是让雨水滑下，仰着的身子是把滑下的雨水接住，然后顺着倾斜的瓦沟，顺流而下，泄入屋边的水沟里。许家山石屋的墙根有很多石避水（也称石散水），一排排斜斜地立在那里，雨水下来后，不至于直接渗入墙根，而是通过石避水的抵挡和导引作用，滑入旁边的水沟里，以确保石屋的基座不会因为雨水的渗透而下陷。<br>
+        </article>
+      </li>
+      <li id="qiangjiao1">
+        <!--图-->
+      </li>
+      <li id="qiangjiao2" style="background-color:#766539 ">
+        <article class="text_4_2 innerbox">
+          &nbsp;&nbsp;&nbsp;&nbsp;石屋的正门一般都朝东或朝南，考虑到门框对石墙的承受力，门一般不大。门的上框大都是整块较厚的石板，因为要承受来自上部的压力；或用碎石砌成拱形，既美观，又便于身材较高的人出入而不碰头。门两边的石头相对比较完整，排列也整齐。<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;站在地势最高的房子的楼上，可以俯视整个村庄。只见屋舍俨然，瓦脊毗连，其间点缀着绿树和电线杆。每当炊烟升起，整个的村庄便氤氲在和谐的充满诗意的朦胧里。<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;门槛也是整块的石条。相比于木门槛，石门槛不易磨损，更不会腐烂。只是因为年长日久、岁月打磨，许家山石屋的石门槛大多平整光滑、亮光可鉴，村民常常把它当凳子坐。劳作归来，坐在自家的石门槛上抽支烟，看着儿女在院子里嬉戏，闻着妻子在灶间烧菜的香味，那是多么惬意的享受。
+        </article>
+      </li>
+    </ul>
+  </section>
+  <section class="part hidden">
+    <a name="shengchu"></a>
+    <h1 class="h_5">石村牲畜</h1>
+    <ul class="shelf_2">
+      <li id="shengchu"></li>
+      <li>
+        <article class="text_5_1 innerbox">
+          &nbsp;&nbsp;&nbsp;&nbsp;至今仍然坚守在铜板石构筑的家园里的人们，他们同时也延续着传统的生产、生活方式。在这片原生态的土地上，他们种植茶叶、花生、土豆，也种植番薯、芋头、水稻、玉米、高山萝卜等，并将传统农家手艺进行到底：牵牛耕田、制番薯粉、做番薯烧酒、捣年糕、做竹编......这些非物质文化范畴里的古老习俗，在现代人看来，哪一项不是亮点？
+        </article>
+        <article class="text_5_2 innerbox">
+          &nbsp;&nbsp;&nbsp;&nbsp;耕牛是对人畜合一的赞美。别看都是农民，配得上喊耕牛的没几人。竟管有人一生都在养牛、用牛。牛能冬天不丢膘、梨田不破肓，牛出门不踩粪、不踩泥坑，牛门与家门一样讲究，说明牛与主人，主人与牛有情意相通之处。心在用牛上，借力是以，心在养牛上，主仆是以啊！别看牛不语，人工好借，牛工难还，人情好借，牛情难还！
+        </article>
+      </li>
+    </ul>
+  </section>
+  <section class="part hidden">
+    <a name="ri"></a>
+    <h1 class="h_6">日出</h1>
+    <h1 class="h_7">日落</h1>
+    <ul class="shelf_3">
+      <li id="ri"></li>
+      <li></li>
+      <li>
+        <article class="text_6 innerbox">
+          &nbsp;&nbsp;&nbsp;&nbsp;早上起床，耳闻冬窗外，鸟儿们叽叽喳喳叫得正欢。眼见薄雾笼罩，初升的昏黄太阳，将温暖的余晖洒满天地。农民们在阳光下辛勤劳作。田野间，随处可见他们忙碌的身影。<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;傍晚，漫步乡间、溪岸，空气清新，绿意盎然，微风吹拂，心旷神怡！远望西边，那一轮红彤彤的夕阳，温馨又从容，慢慢的落山了。农民们干完农活，收拾农具，徒步回家做晚饭，炊烟袅袅，灯火通明。吃过晚饭，客厅坐聊，或观看电视节目。大约9点钟后，就各自去洗漱，熄灯休息。<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;耕种的日子是漫长而又无聊的。于是偶尔飞落在田间的一只小麻雀或是天空中一朵奇形怪状的浮云总能轻而易举地吸引一些人的视线。我们管它叫做诱惑。<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;每个人心里都有困兽，每个人都有神魂颠倒被诱惑的经历、都有想入非非的冲动、都有半推半就的假正经、都有东冲西突的挣扎。一些人看到地里差不多成形的庄稼，再看看土地外五光十色的诱惑，努力说服自己：就出去一小会儿、就一小会儿。可到了外面，哪还由得了自己。五分钟变成了一小时，一小时变成了一整天，一整天变成了半个月……等他们重新回到地里时，只剩干枯低垂的秸梗，他们欲哭却无泪。<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;待到来年秋天，那些收获的人便是笑到最后的人。<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;人生在这里，大概没有本质的区别，自古至今，不管是豪门富贵子，还是穷困潦倒徒，到头来走南闯北，居东隐西，哪个不是自己决定了自己的命运和归宿？<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;耕好土地，只能靠自己。
+        </article>
+      </li>
+    </ul>
+  </section>
+  <section class="part hidden">
+    <a name="yiyv" id="a1"></a>
+    <h1 class="h_8">石村一隅</h1>
+    <ul class="shelf_4">
+      <li>
+        <article class="text_1 innerbox">
+          &nbsp;&nbsp;&nbsp;&nbsp;水口位于村庄的东北侧村口，是一个山塘水库，面积约两百平方米，深达十多米。山区缺水，许家山人就是靠这山塘水库，居高临下、高屋建瓴，灌溉着这些梯田，以此来养家活命的。从这个意义上来说，把这里称作许家山的风水门户也未尝不可，因为在农耕社会，它事关着许家山人的生存福祉和血脉延续。<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;这里可谓是在许家山观赏自然风光的最佳之地。站在峡口大坝上，有一览众山小之感。远远近近的风光尽收眼底。<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;远处，可眺望山峦起伏、溪流绵延，那山的最高处，就是茶山了。近处，可俯瞰村烟缭绕、田园绵延，西林水库像一颗明珠镶嵌在群山从中。眼皮底下，即是层层叠叠的梯田了。那梯田，随着四季播种的作物不同，景色也不同。春天，正值袁宏道在《满井游记》中所说“麦田浅鬣寸许”之时，小麦如茵，菜花金黄；夏日，麦浪滚滚、瓜果飘香；秋高气爽的时节，则金黄满川、豆荚摇铃；待到雪漫山野，登临翠峰，就会让人神思飞越，陈念全消，顿生“山道绝顶我为峰”之感......
+        </article>
+      </li>
+      <li id="yiyv"></li>
+      <li></li>
+    </ul>
+  </section>
+</body>
+<script src="../Public_Assets/js/jquery.min.js"></script>
+<script>
+  $(".part").addClass("hidden")
+  var index = 0
+  var href = location.href.split("#")[1]
+  switch (href) {
+    case "shiwu":
+      index = 1;
+      break;
+    case "ri":
+      index = 5
+      break;
+    case "shengchu":
+      index = 4;
+      break;
+    case "a1":
+      index = 6;
+      break;
+    case "a2":
+      index = 3;
+      break;
+  }
+  $(".part")[index].classList.remove("hidden")
+  var h = document.body.scrollHeight / 7
+  var state = true
+  var scrollFunc = function (e) {
+    e = e || window.event;
+    if (e.target.tagName != "ARTICLE") {
+      if (!state) return;
+      if (e.wheelDelta || e.originalEvent.wheelDelta) { //判断浏览器IE，谷歌滑轮事件
+        if (e.wheelDelta > 0 || e.originalEvent.wheelDelta > 0) { //当滑轮向上滚动时
+          index--
+        }
+        if (e.wheelDelta < 0 || e.originalEvent.wheelDelta < 0) { //当滑轮向下滚动时
+          index++
+        }
+      } else if (e.detail) { //Firefox滑轮事件
+        if (e.detail > 0) { //当滑轮向上滚动时
+          index--
+        }
+        if (e.detail < 0) { //当滑轮向下滚动时
+          index++
+        }
+      }
+      if (index < 0) {
+        index = 0
+      }
+      if (index > 6) {
+        index = 6
+      }
+      if (state) {
+        $(".part").addClass("hidden");
+        $(".part")[index].classList.remove("hidden");
+        state = false
+        setTimeout(() => {
+          state = true
+        }, 300);
+      }
+    }
+  };
+
+  $(document).on("mousewheel", scrollFunc)
+</script>
+
+</html>

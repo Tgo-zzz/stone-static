@@ -1,0 +1,18 @@
+{
+  "name": "Minecraft",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.4.1",
+    "konva": "^4.0.5",
+    "stats-js": "^1.0.1",
+    "three": "^0.107.0"
+  }
+}

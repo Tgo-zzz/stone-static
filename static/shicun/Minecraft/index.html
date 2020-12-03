@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Minecraft</title>
+</head>
+<script src="./node_modules/three/build/three.js"></script>
+<script src="./node_modules/stats-js/build/stats.js"></script>
+<script src="./node_modules/three/examples/js/loaders/MTLLoader.js"></script>
+<script src="./node_modules/three/examples/js/loaders/OBJLoader.js"></script>
+<script src="./src/js/PointerLockControls.js"></script>
+<script src="../userEntry/js/init.js"></script>
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  ul,
+  li {
+    padding: 0;
+    margin: 0;
+    list-style: none
+  }
+
+  canvas {
+    width: 100%;
+    height: 100%;
+    z-index: 8888;
+  }
+
+  #aim {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    right: calc(50% - 10px);
+    top: calc(50% - 10px);
+    background: url("./src/assets/icon/aim.png") no-repeat center center;
+    background-size: 100% 100%;
+    z-index: 99999;
+  }
+
+  #blocks {
+    position: fixed;
+    right: calc(50% - 300px);
+    bottom: 50px;
+    width: 600px;
+  }
+
+  li {
+    width: 30px;
+    height: 30px;
+    border: 2px black solid;
+    float: left;
+    cursor: pointer;
+    background-color: blanchedalmond
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  #btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+  }
+
+  #save{
+    background-color: transparent;
+    outline: none;
+    border: 1px #E7C97D solid;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #E7C97D;
+    filter: grayscale(100%);
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  #quit{
+    background-color: transparent;
+    outline: none;
+    border: 1px #E7C97D solid;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #E7C97D;
+    filter: grayscale(100%);
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  #save:hover{
+    filter: none;
+  }
+  #quit:hover{
+    filter: none;
+  }
+  #save::before{
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    background: no-repeat center center url(./src/assets/icon/save.png);
+    background-size: cover;
+  }
+  #quit::before{
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    background: no-repeat center center url(./src/assets/icon/quit.png);
+    background-size: cover
+  }
+</style>
+
+<body>
+  <div id="aim"></div>
+  <div id="blocks">
+    <ul>
+      <li><img src="./src/assets/BoxImg/dirt.png" title="PlainBox"></li>
+      <li><img src="./src/assets/BoxImg/dirt_podzol_top.png" title="soil"></li>
+      <li><img src="./src/assets/BoxImg/bedrock.png" title="bedrock"></li>
+      <li><img src="./src/assets/BoxImg/grass_top.png" title="grass"></li>
+      <li><img src="./src/assets/BoxImg/brick.png" title="brick"></li>
+      <li><img src="./src/assets/BoxImg/planks_acacia.png" title="planks_acacia"></li>
+      <li><img src="./src/assets/BoxImg/planks_big_oak.png" title="planks_big_oak"></li>
+      <li><img src="./src/assets/BoxImg/planks_birch.png" title="planks_birch"></li>
+      <li><img src="./src/assets/BoxImg/planks_jungle.png" title="planks_jungle"></li>
+      <li><img src="./src/assets/BoxImg/planks_spruce.png" title="planks_spruce"></li>
+      <li><img src="./src/assets/BoxImg/stone.png" title="stone"></li>
+      <li><img src="./src/assets/BoxImg/stone_andesite.png" title="stone_andesite"></li>
+      <li><img src="./src/assets/BoxImg/stone_andesite_smooth.png" title="stone_andesite_smooth"></li>
+      <li><img src="./src/assets/BoxImg/stone_diorite.png" title="stone_diorite"></li>
+      <li><img src="./src/assets/BoxImg/stone_diorite_smooth.png" title="stone_diorite_smooth"></li>
+      <li><img src="./src/assets/BoxImg/stone_granite.png" title="stone_granite"></li>
+      <li><img src="./src/assets/BoxImg/stone_granite_smooth.png" title="stone_granite_smooth"></li>
+      <li><img src="./src/assets/BoxImg/stone_slab_top.png" title="stone_slab"></li>
+      <li><img src="./src/assets/BoxImg/stonebrick.png" title="stonebrick"></li>
+      <li><img src="./src/assets/BoxImg/stonebrick_carved.png" title="stonebrick_carved"></li>
+      <li><img src="./src/assets/BoxImg/stonebrick_cracked.png" title="stonebrick_cracked"></li>
+      <li><img src="./src/assets/BoxImg/stonebrick_mossy.png" title="stonebrick_mossy"></li>
+    </ul>
+    <ul>
+      <li><img src="./src/assets/BoxModel/stairs_plain.png" title="stairs_plain"></li>
+      <li><img src="./src/assets/BoxModel/fence.png" title="fence"></li>
+      <li><img src="./src/assets/BoxModel/glass.png" title="glass"></li>
+      <li><img src="./src/assets/BoxModel/leave.png" title="leave"></li>
+      <li><img src="./src/assets/BoxModel/leaves_opaque.png" title="leaves_opaque"></li>
+      <li><img src="./src/assets/BoxModel/log_jungle.png" title="log_jungle"></li>
+      <li><img src="./src/assets/BoxModel/water.png" title="water"></li>
+    </ul>
+  </div>
+  <div id="btn">
+    <button id="save">&nbsp;保存</button>
+    <a href="../home/home.html"><button id="quit">&nbsp;退出</button></a>
+  </div>
+</body>
+<script src="./src/js/util.js"></script>
+<script src="./src/js/block.js"></script>
+<script src="./src/js/map.js"></script>
+<script src="./src/js/build.js"></script>
+<script>
+  var lis = document.getElementsByTagName("li")
+  var usingBlcok = "stairs_plain"
+
+  function chooseBlcok(e) {
+    usingBlcok = e.target.title
+  }
+  for (let i = 0; i < lis.length; i++) {
+
+    lis[i].addEventListener("click", chooseBlcok, false)
+
+  }
+
+  var stats = new Stats();
+  stats.showPanel(2); // 0: fps, 1: ms, 2: mb, 3+: custom
+  document.body.appendChild(stats.dom);
+
+
+  /**
+   * 创建场景对象Scene
+   */
+  let scene = new THREE.Scene()
+  window.THREE = THREE
+  window.scene = scene
+  /**
+   * 创建网格模型
+   */
+  let time = new Date().getTime();
+
+  let Blocks = new Block()
+  Blocks.init();
+
+  let bitMap = []
+  let Mc = new MCMap()
+  // var build = new build(bitMap, camera);
+  var req = new XMLHttpRequest()
+  req.onreadystatechange = () => {
+    if (req.readyState == 4 && req.status == 200) {
+
+      var res = JSON.parse(req.responseText);
+      if (res.code == 1) {
+        bitMap = JSON.parse(res.data.bitMap)
+        Mc.readMap(res.data.model, (obj)=> {
+          scene = obj
+          var width = window.innerWidth; //窗口宽度
+          var height = window.innerHeight; //窗口高度
+          var k = width / height; //窗口宽高比
+          var s = 150; //三维场景显示范围控制系数，系数越大，显示的范围越大
+          //创建相机对象
+          var camera = new THREE.PerspectiveCamera(45, k, 1, 2000);
+
+          camera.position.set(50, 400, 400); //设置相机位置
+          camera.lookAt(50, 200, -400); //设置相机方向(指向的场景对象)
+          /**
+           * 创建渲染器对象
+           */
+          var renderer = new THREE.WebGLRenderer({
+            alpha: true,
+            antialias: true
+          });
+          renderer.setSize(width, height); //设置渲染区域尺寸
+          renderer.setClearColor(0xffffff, 1); //设置背景颜色
+          document.body.appendChild(renderer.domElement); //body元素中插入canvas对象
+          //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
+          var controls = new THREE.PointerLockControls(bitMap, camera);
+          var build = new window.build(bitMap, camera);
+          //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
+          controls.addEventListener("lock", build.connect)
+          controls.addEventListener("unlock", build.disconnect)
+
+          window.addEventListener("click", function () {
+            if (!controls.isLocked) {
+              controls.lock();
+            }
+          })
+          window.BufferMovement = new THREE.Vector3()
+          var clock = new THREE.Clock();
+          // 渲染函数
+          function render() {
+            controls.motion(clock.getDelta())
+            camera.position.add(BufferMovement)
+            BufferMovement.set(0, 0, 0)
+            renderer.render(scene, camera); //执行渲染操作
+            stats.end();
+            stats.begin();
+            requestAnimationFrame(render);
+          }
+          requestAnimationFrame(render);
+        })
+      }
+    }
+  }
+  req.withCredentials = true;
+  req.open('get', `http://localhost:3160/minecraft`, false);
+  req.send(null);
+
+  // let noise = Mc.Noise({
+  //   x: 50,
+  //   y: 50
+  // }, {
+  //   x: 5,
+  //   y: 5
+  // })
+  // console.log(noise, Blocks.Box)
+
+  // noise.forEach((e, x) => {
+  //   bitMap[x] = []
+  //   e.forEach((e, y) => {
+  //     bitMap[x][y] = {}
+  //     bitMap[x][y][parseInt(e * 15)] = true
+  //     bitMap[x][y][parseInt(e * 15) - 1] = true
+  //     bitMap[x][y][parseInt(e * 15) - 2] = true
+  //     let box1 = Blocks.grass()
+  //     box1.name = x + "_" + y + "_" + parseInt(e * 15)
+  //     box1.position.set(x * 100, parseInt(e * 15) * 100, y * 100)
+  //     let box2 = Blocks.PlainBox()
+  //     box2.name = x + "_" + y + "_" + (parseInt(e * 15) - 1)
+  //     box2.position.set(x * 100, parseInt(e * 15) * 100 - 100, y * 100)
+  //     let box3 = Blocks.PlainBox()
+  //     box3.name = x + "_" + y + "_" + (parseInt(e * 15) - 2)
+  //     box3.position.set(x * 100, parseInt(e * 15) * 100 - 200, y * 100)
+  //     scene.add(box1, box2, box3)
+  //   })
+  // });
+
+  // scene.position.set(-2450, 50, -2450);
+  // scene.fog = new THREE.Fog(0xffffff, 1500, 2000);
+
+  // var geometry = new THREE.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
+  // var material = new THREE.MeshLambertMaterial({
+  //   color: 0x0000ff
+  // }); //材质对象Material
+  // var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
+  // scene.add(mesh); //网格模型添加到场景中
+  // /**
+  //  * 光源设置
+  //  */
+  // //点光源
+  //   console.log(this.build)
+  //   var point = new THREE.PointLight(0xffffff);
+  //   point.position.set(1000, 2000, 1000); //点光源位置
+  //   scene.add(point); //点光源添加到场景中
+  //   //平行光
+  //   // var light = new THREE.DirectionalLight( 0xffffff, 1 );
+
+  //   // light.target = new THREE.Object3D()
+  //   // scene.add( light.target );
+  //   // scene.add(light);
+
+  //   //环境光
+  //   var ambient = new THREE.AmbientLight(0xcccccc);
+  //   scene.add(ambient);
+  //   /**
+  //    * 相机设置
+  //    */
+  //   var width = window.innerWidth; //窗口宽度
+  //   var height = window.innerHeight; //窗口高度
+  //   var k = width / height; //窗口宽高比
+  //   var s = 150; //三维场景显示范围控制系数，系数越大，显示的范围越大
+  //   //创建相机对象
+  //   var camera = new THREE.PerspectiveCamera(45, k, 1, 2000);
+
+  //   camera.position.set(50, 400, 400); //设置相机位置
+  //   camera.lookAt(50, 200, -400); //设置相机方向(指向的场景对象)
+  //   /**
+  //    * 创建渲染器对象
+  //    */
+  //   var renderer = new THREE.WebGLRenderer({
+  //     alpha: true,
+  //     antialias: true
+  //   });
+  //   renderer.setSize(width, height); //设置渲染区域尺寸
+  //   renderer.setClearColor(0xffffff, 1); //设置背景颜色
+  //   document.body.appendChild(renderer.domElement); //body元素中插入canvas对象
+
+  // //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
+  // var controls = new THREE.PointerLockControls(bitMap, camera);
+  // var build = new build(bitMap, camera);
+  // //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
+  // controls.addEventListener("lock", build.connect)
+  // controls.addEventListener("unlock", build.disconnect)
+
+  // window.addEventListener("click", function () {
+  //   if (!controls.isLocked) {
+  //     controls.lock();
+  //   }
+  // })
+  // var BufferMovement = new THREE.Vector3()
+  // var clock = new THREE.Clock();
+  // // 渲染函数
+  // function render() {
+  //   controls.motion(clock.getDelta())
+  //   camera.position.add(BufferMovement)
+  //   BufferMovement.set(0, 0, 0)
+  //   renderer.render(scene, camera); //执行渲染操作
+  //   stats.end();
+  //   stats.begin();
+  //   requestAnimationFrame(render);
+  // }
+  // requestAnimationFrame(render);
+
+  document.getElementById("save").addEventListener('click', () => {
+    var req1 = new XMLHttpRequest()
+    var state = 0
+    req1.onreadystatechange = function () {
+      if (req1.readyState == 4 && req1.status == 200) {
+        var res1 = JSON.parse(req1.responseText);
+        if (res1.code == 1) {
+          state++
+        }
+        if (state == 2) {
+          alert("保存成功")
+        }
+      }
+    }
+    req1.withCredentials = true;
+    req1.open('post', `http://localhost:3160/record/minecraft`);
+    req1.send(Mc.saveMap());
+
+    var req2 = new XMLHttpRequest()
+    req2.onreadystatechange = function () {
+      if (req2.readyState == 4 && req2.status == 200) {
+        var res2 = JSON.parse(req2.responseText);
+        if (res2.code == 1) {
+          state++
+        }
+        if (state == 2) {
+          alert("保存成功")
+        }
+      }
+    }
+    req2.withCredentials = true;
+    req2.open('post', `http://localhost:3160/record/minecraftMap`);
+    req2.send(JSON.stringify(bitMap));
+
+  }, false)
+</script>
+
+</html>

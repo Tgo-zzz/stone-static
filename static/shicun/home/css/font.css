@@ -1,0 +1,12 @@
+@font-face{
+  font-family: "impact";
+  src: url("../font/home.woff")
+}
+@font-face{
+  font-family: "Century Gothic";
+  src: url("../font/home2.woff")
+}
+@font-face{
+  font-family: "lnkfree";
+  src: url("../font/nav.woff")
+}

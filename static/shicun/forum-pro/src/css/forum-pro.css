@@ -1,0 +1,794 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  outline: none;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+}
+
+:root {
+  background-color: #e6e6e6
+}
+
+button,
+input {
+  border: none;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ————————————————————————————————————--修改默认--———————————————————————————————————— */
+
+.forum-head {
+  width: 100%;
+  height: 60px;
+  background-color: #E7C97D;
+}
+
+.forum-head .container {
+  position: relative;
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.forum-head .container div {
+  display: inline-block;
+}
+
+.forum-logo {
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  height: 100%;
+  margin-left: 30px;
+}
+
+.forum-logo a img {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.forum-bar {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0 10px;
+}
+
+.forum-bar h2,
+.forum-bar ul,
+.forum-bar ul li {
+  display: inline-block;
+  padding-left: 15px;
+  text-align: center;
+  position: relative;
+}
+
+.forum-bar h2,
+.forum-bar ul li a {
+  color: white;
+  font-weight: 500;
+}
+
+.ask-question {
+  display: inline-block;
+  background-color: #FFFFFF;
+  width: 90px;
+  padding: 7px 20px;
+  border-radius: 5px;
+  text-align: center;
+  color: #E7C97D !important;
+}
+
+.search {
+  position: absolute;
+  width: 200px;
+  height: calc(100% - 20px);
+  right: 250px;
+  top: 50%;
+  transform: translateY(-50%)
+}
+
+.search form {
+  display: inline-block;
+  height: 100%;
+}
+
+.search form input {
+  display: inline-block;
+  width: 145px;
+  height: 100%;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  padding: 0 45px 0 10px;
+}
+
+.search form button {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 40px;
+  background-color: transparent;
+}
+
+.btn-icon {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background: no-repeat center center;
+  background-size: 70%;
+}
+
+.btn-icon.seek {
+  background-image: url(../img/icon/search.png)
+}
+
+.register {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.register ul,
+.register ul li {
+  display: inline-block;
+  margin: 0 5px
+}
+
+.register ul li {
+  cursor: pointer;
+}
+
+.register ul li a {
+  color: #FFFFFF;
+}
+
+.register ul li a img {
+  display: inline-block;
+  border: black 1px solid;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+.btn {
+  padding: 10px 15px;
+  border: #FFFFFF 1px solid;
+  border-radius: 5px;
+}
+
+.register .btn {
+  border-color: #FFFFFF
+}
+
+/* —————————————————————————————————————--顶部header--———————————————————————————————————————— */
+#notice-show{
+  display: inline-block;
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  width: 0px;
+  height: 0px;
+  border: 10px white solid;
+  transform: rotate(45deg);
+  opacity: 0.8;
+  z-index: 999999;
+}
+
+.notice {
+  position: absolute;
+  top: 35px;
+  left: 20%;
+  width: 300px;
+  height: 500px;
+  background: white;
+  margin: 25px auto;
+  box-shadow: 3px 3px 5px 5px #cfcfcf;
+  z-index: 9999;
+}
+
+.notice-bottom{
+  border-top: 1px #cfcfcf solid;
+  height: 50px;
+  padding: 0px 20px ;
+  position: relative;
+}
+.notice-bottom span{
+  display: inline-block;
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.notice .box {
+  width: 300px;
+  height: 65px;
+  border-bottom: 1px solid #cfcfcf;
+
+}
+
+.notice .box div {
+  display: block;
+  float: left;
+  width: 95px;
+  height: 45px;
+  margin: 10px 0px;
+  border-right: 1px solid #cfcfcf;
+  text-align: center;
+}
+
+.notice .box .span3 {
+  border: none;
+}
+
+.span1 a {
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  background: url(../img/caidan.png) center center no-repeat;
+  background-size: 90% 90%;
+}
+
+.span2 a {
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  background: url(../img/people.png) center center no-repeat;
+  background-size: 90% 90%;
+}
+
+.span3 a {
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  background: url(../img/love.png) center center no-repeat;
+  background-size:90% 90%;
+}
+
+.detail {
+  width: 300px;
+  height: 384px;
+  overflow-y: scroll;
+}
+
+.line1 {
+  font-weight: 700;
+  font-size: 14px;
+  /*	height: 80px;*/
+  border-bottom: 1px solid #eee;
+  padding: 15px
+}
+
+.line1 a {
+  font-size: 16px;
+}
+
+.line1 a:hover {
+  color: red;
+}
+
+/* ————————————————————————————————————————————————通知消息———————————————————————————————————————————————————————— */
+.ul-inline {
+  display: inline-block;
+}
+
+.ul-inline li {
+  display: inline-block;
+}
+
+.forum-sec {
+  position: relative;
+  width: 100%;
+  height: 53px;
+  background-color: #FFFFFF;
+  padding-bottom: 2px;
+}
+
+.forum-sec .container {
+  position: relative;
+  max-width: 1140px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 30px;
+  top: 50%;
+  transform: translateY(-50%)
+}
+
+.forum-sec .container ul {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%)
+}
+
+.forum-sec .container ul li a {
+  color: #afafaf;
+  letter-spacing: 2px;
+  margin: 0 10px
+}
+
+.vernier {
+  height: 2px;
+  position: absolute;
+  transition: all 0.3s;
+  background-color: #E7C97D;
+  left: 0;
+  bottom: 0;
+}
+
+/* —————————————————————————————————————--二级导航--———————————————————————————————————————— */
+
+.forum-page {
+  display: block;
+  padding: 50px 50px 0 50px;
+  max-width: 1100px;
+  margin: 0 auto
+}
+
+.col-8 {
+  display: inline-block;
+  width: 66%;
+  vertical-align: top
+}
+
+.col-4 {
+  display: inline-block;
+  width: 33%;
+  vertical-align: top
+}
+
+.forum-questions {
+  padding: 0 15px;
+}
+
+.forum-user-question {
+  position: relative;
+  display: block;
+  padding: 25px;
+  background-color: #FFFFFF;
+  border-bottom: 1px #afafaf solid
+}
+
+.forum-user-question img {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  vertical-align: top
+}
+
+.forum-user-question .container {
+  position: relative;
+  display: inline-block;
+  width: calc(100% - 150px);
+  padding: 0 20px;
+}
+
+.question-content {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.question-content {
+  color: #afafaf
+}
+
+.react-links li {
+  width: 100px;
+  color: red;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.react-icon {
+  display: inline-block;
+  vertical-align: middle;
+  height: 25px;
+  width: 25px;
+  background: no-repeat center center;
+  background-size: 70%;
+}
+
+.react-links li:hover {
+  filter: none;
+}
+
+.react-icon.applaud {
+  background-image: url(../img/icon/applaud.png)
+}
+
+.react-icon.comment {
+  background-image: url(../img/icon/comment.png)
+}
+
+.react-icon.view {
+  background-image: url(../img/icon/view.png)
+}
+
+.quest-tags {
+  margin-top: 20px;
+}
+
+.quest-tags li {
+  color: #FFFFFF;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: #53d690;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.quest-time {
+  position: absolute;
+  right: 50px;
+  bottom: 5px;
+  color: #afafaf
+}
+
+.pagination {
+  width: 600px;
+  margin: 50px auto;
+}
+
+/* —————————————————————————————————————--问题--———————————————————————————————————————— */
+
+.user-poster {
+  width: calc(100% - 70px);
+  margin: 0 15px;
+  background-color: #FFFFFF;
+  border: 1px solid #cfcfcf;
+  padding: 20px;
+}
+
+.user-poster .question {
+  position: relative;
+  padding: 0px 0px 20px 80px
+}
+
+.question .portrait {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.user-poster article {
+  color: #afafaf
+}
+
+.portrait img {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+}
+
+.question .time {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #cfcfcf
+}
+
+.question .time::before {
+  content: "";
+  display: inline-block;
+  height: 14px;
+  width: 14px;
+  background: url(../img/icon/time.png) no-repeat center center;
+  background-size: contain;
+  transform: translateX(-5px);
+  vertical-align: middle
+}
+
+.quest-feat {
+  margin: 10px;
+}
+
+.quest-feat span {
+  color: #cfcfcf;
+  padding-right: 30px;
+  filter: grayscale(80%);
+}
+
+.quest-feat span.active {
+  transition: all 0.3s;
+  filter: grayscale(0%)
+}
+
+.quest-feat span:nth-child(1)::before {
+  content: "";
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  background: url(../img/icon/applaud.png) no-repeat center center;
+  background-size: contain;
+  transform: translateX(-15px);
+  vertical-align: middle;
+}
+
+.quest-feat span:nth-child(2)::before {
+  content: "";
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  background: url(../img/icon/share.png) no-repeat center center;
+  background-size: contain;
+  transform: translateX(-15px);
+  vertical-align: middle
+}
+
+.user-commit>h3 {
+  padding: 10px 0;
+  border-bottom: 1px solid #cfcfcf;
+}
+
+.question ul li {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.question ul li .portrait {
+  transform: translateX(-80px) scale(0.8, 0.8)
+}
+
+.commit-post {
+  border-top: 1px solid #afafaf;
+}
+
+/* —————————————————————————————————————--问题详情--———————————————————————————————————————— */
+
+.pagination {
+  display: block;
+  width: calc(100% - 60px);
+  margin: 20px 15px 50px 15px;
+  padding: 0 15px;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+}
+
+.page-list {
+  padding: 10px
+}
+
+.page-list li {
+  padding: 10px 20px;
+  background-color: #e6e6e6;
+  border-radius: 5px;
+}
+
+.page-list li.active {
+  background-color: red;
+  color: #FFFFFF;
+}
+
+/* ————————————————————————————————————--翻页栏--———————————————————————————————————— */
+
+.widget-feat {
+  margin: 0 15px 30px 15px;
+  background-color: #FFFFFF;
+  border: #cfcfcf 1px solid;
+  padding: 20px;
+}
+
+.widget-feat>ul {
+  width: 100%
+}
+
+.widget-feat>ul>li {
+  box-sizing: border-box;
+  width: 23%;
+  padding: 0 10px;
+  text-align: center;
+  color: #afafaf
+}
+
+.widget-feat ul li img {
+  width: 20px;
+  height: 20px;
+}
+
+/* ————————————————————————————————————--文章活跃数据--———————————————————————————————————— */
+
+.forum-widget-users {
+  margin: 0 15px 50px 15px;
+  background-color: #FFFFFF;
+  border: 1px solid #e6e6e6;
+}
+
+.forum-widget-users h2 {
+  padding: 20px;
+  border-bottom: 1px solid #cfcfcf;
+  letter-spacing: 2px;
+  font-weight: 100;
+}
+
+.widget-user {
+  padding: 15px 25px;
+  position: relative;
+}
+
+.widget-user img {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+.widget-user .user-infor {
+  display: inline-block;
+  padding: 5px;
+}
+
+.user-infor h3 {
+  color: #afafaf
+}
+
+.widget-user .widget {
+  position: absolute;
+  left: calc(100% - 80px);
+  top: 50%;
+  transform: translateY(-50%);
+  color: #afafaf
+}
+
+.widget-user .widget::before {
+  content: "";
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  background: no-repeat center center;
+  background-size: contain;
+  vertical-align: middle;
+}
+
+.forum-widget-users ul a:nth-child(1) .widget-user .widget::before {
+  background-image: url(../img/icon/price1.png);
+}
+
+.forum-widget-users ul a:nth-child(2) .widget-user .widget::before {
+  background-image: url(../img/icon/price2.png)
+}
+
+.forum-widget-users ul a:nth-child(3) .widget-user .widget::before {
+  background-image: url(../img/icon/price3.png)
+}
+
+.forum-widget-users ul a:nth-child(4) .widget-user .widget::before {
+  background-image: url(../img/icon/price4.png)
+}
+
+/* .img-show{
+  display: block;
+  margin: 15px;
+  position: relative;
+}
+.img-show div{
+ height: 300px;
+} */
+
+/* ————————————————————————————————————--活跃用户--———————————————————————————————————— */
+
+footer {
+  display: block;
+  position: relative;
+  padding: 15px;
+  background-color: white;
+  text-align: center;
+  color: #cfcfcf;
+  margin-bottom: 0;
+}
+
+footer p {
+  font-size: 16px;
+  margin: 10px;
+}
+
+footer>img {
+  height: 30px;
+  transform: translateY(7.5px)
+}
+
+footer ul li {
+  font-size: 12px;
+  padding: 20px 40px;
+  border-right: #cfcfcf solid 1px;
+}
+
+footer ul li:nth-last-child(1) {
+  border: none;
+}
+
+footer ul li a {
+  color: #cfcfcf
+}
+
+/* ————————————————————————————————————--页脚--———————————————————————————————————— */
+
+.question-box {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+}
+
+.overview-edit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 550px;
+  height: 460px;
+  padding: 25px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  overflow: visible;
+}
+
+.close-box {
+  position: absolute;
+  display: block;
+  right: -25px;
+  top: -25px;
+  width: 25px;
+  height: 25px;
+  background: url(../img/icon/close.png) no-repeat center center;
+  background-size: contain
+}
+
+.overview-edit h3 {
+  margin: 20px 0px;
+  font-weight: 100;
+}
+
+.overview-edit textarea {
+  height: 160px;
+}
+
+.overview-edit form input,
+.overview-edit form textarea {
+  width: 500px;
+  padding: 10px;
+  margin: 10px 10px;
+  border: 1px #cfcfcf solid;
+  border-radius: 5px;
+}
+
+.overview-edit form button {
+  text-align: center;
+  width: 100px;
+  height: 45px;
+  border-radius: 5px;
+  margin: 10px 20px;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.overview-edit form button:hover {
+  opacity: 0.5;
+}
+
+.overview-edit form #save {
+  background-color: #E7C97D;
+  color: #FFFFFF;
+}
+
+.overview-edit form #cancel {
+  border: #cfcfcf 1px solid;
+  background-color: #FFFFFF;
+}

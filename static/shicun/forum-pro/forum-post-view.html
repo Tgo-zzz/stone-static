@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./src/css/forum-pro.css">
+  <link rel="stylesheet" href="./src/css/commit.css">
+</head>
+<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+
+<body>
+  <header class="forum-head">
+    <div class="container">
+      <span class="forum-logo">
+        <a href="#"><img src="./src/img/logo.png" alt="logo"></a>
+      </span>
+      <div class="forum-bar">
+        <h2>石村论坛</h2>
+        <ul>
+          <li><a href="#">首页</a></li>
+          <li><a href="#">标签</a></li>
+          <li onclick="showNotice()"><a href="#">通知板</a><i id="notice-show" style="display: none"></i></li>
+          <li><a href="#" id="ask-question" class="ask-question">提&nbsp;&nbsp;&nbsp;&nbsp;问</a></li>
+        </ul>
+      </div>
+      <div class="search">
+        <form action="#" method="GET">
+          <input type="text" name="search" placeholder="Search...">
+          <button type="submit"><i class="btn-icon seek"></i></button>
+        </form>
+      </div>
+      <div class="register">
+        <ul>
+          <li><a href="" class="btn">登&nbsp;&nbsp;录</a></li>
+          <li><a href="" class="btn">注&nbsp;&nbsp;册</a></li>
+          <li style="display: none"><a href="" class="portrait"><img src="" alt="portrait">&nbsp;名字</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="notice" style="display: none">
+      <div class="box">
+        <div class="span1"><a href="#"></a></div>
+        <!-- <div class="span2"><a href="#"></a></div>
+        <div class="span3"><a href="#"></a></div> -->
+      </div>
+      <div class="detail">
+        <div class="line1">
+          <a href="#"> .K </a>给<a href="#"> 老中医包治生发 </a>丢了一枚臭鸡蛋........
+        </div>
+        <div class="line1">
+          <a href="#"> 萝卜鱼 </a> 的提问等 <a href="#"> .K </a> 来回答
+        </div>
+        <div class="line1">
+          <a href="#"> 奴娇 </a>给<a href="#"> 老中医包治生发 </a> 点了个大大的赞
+        </div>
+        <div class="line1">
+          <a href="#"> 斯帕罗 </a>给<a href="#"> 萝卜鱼 </a>评论了两条留言，请查收！
+        </div>
+      </div>
+      <div class="notice-bottom"> <span>全部通知</span> </div>
+    </div>
+  </header>
+
+  <section class="forum-sec">
+    <div class="container">
+      <ul class="ul-inline">
+        <li><a href="#">最&nbsp;新</a></li>
+        <li><a href="#">待解决</a></li>
+        <li><a href="#">今&nbsp;日</a></li>
+        <li><a href="#">本周最热</a></li>
+        <li><a href="#">本月最热</a></li>
+      </ul>
+    </div>
+    <span id="forum-sec-vernier" class="vernier"></span>
+  </section>
+
+  <main class="forum-page">
+    <div class="col-8">
+
+      <div class="user-poster">
+        <div class="question">
+          <span class="portrait">
+            <img src="../../data/por/por_0.jpg" alt="user">
+          </span>
+          <h3>标题</h3>
+          <p class="time">时间</p>
+          <p class="quest-feat">
+            <span>111</span>
+            <span>111</span>
+          </p>
+          <ul class="quest-tags ul-inline">
+            <li>java</li>
+            <li>php</li>
+            <li>js</li>
+          </ul>
+          <br>
+          <br>
+          <br>
+          <article>
+            orem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at libero elit. Mauris ultrices sed
+            lorem nec efficitur. Donec sit amet facilisis lorem, quis facilisis tellus. Nullam mollis dignissim nisi sit
+            amet tempor. Nullam sollicitudin neque a felis commodo gravida at sed nunc. In justo nunc, sagittis sed
+            venenatis at, dictum vel erat. Curabitur at quam ipsum. Quisque eget nibh aliquet, imperdiet diam pharetra,
+            dapibus lacus. Sed tincidunt sapien in dui imperdiet eleifend. Ut ut sagittis purus, non tristique elit.
+            Quisque tincidunt metus eget ligula sodales luctus. Donec convallis ex at dui convallis malesuada. Orci
+            varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut pretium euismod mollis.
+            Pellentesque convallis gravida ante eu pretium. Integer rutrum mi nec purus tincidunt, nec rhoncus mauris
+            porttitor. Donec id tellus at leo gravida egestas. Suspendisse consequat mi vel euismod efficitur. Donec sed
+            elementum libero.Etiam rutrum ut urna eu tempus. Curabitur suscipit quis lorem vel dictum. Aliquam erat
+            volutpat. Pellentesque volutpat viverra pulvinar. Mauris ac sapien ac metus tincidunt volutpat eu eu purus.
+            Suspendisse pharetra quis quam id auctor. Pellentesque feugiat venenatis urna, vitae suscipit enim volutpat
+            vitae. Nunc egestas tortor est, at sodales ligula auctor efficitur.
+          </article>
+          <br>
+          <div class="user-commit">
+            <h3>评论</h3>
+            <br>
+            <br>
+            <ul class="question">
+              <li>
+                <span class="portrait">
+                  <img src="../../data/por/por_0.jpg" alt="user">
+                </span>
+                <h3>name</h3>
+                <p class="time">时间</p>
+                <br>
+                <article>
+                  .Etiam rutrum ut urna eu tempus. Curabitur suscipit quis lorem vel dictum. Aliquam erat
+                  volutpat. Pellentesque volutpat viverra pulvinar. Mauris ac sapien ac metus tincidunt volutpat eu eu
+                  purus.
+                  Suspendisse pharetra quis quam id auctor. Pellentesque feugiat venenatis urna, vitae suscipit enim
+                  volutpat
+                  vitae. Nunc egestas tortor est, at sodales ligula auctor efficitur.
+                </article>
+              </li>
+              <li>
+                <span class="portrait">
+                  <img src="../../data/por/por_0.jpg" alt="user">
+                </span>
+                <h3>name</h3>
+                <p class="time">时间</p>
+                <br>
+                <article>
+                  .Etiam rutrum ut urna eu tempus. Curabitur suscipit quis lorem vel dictum. Aliquam erat
+                  volutpat. Pellentesque volutpat viverra pulvinar. Mauris ac sapien ac metus tincidunt volutpat eu eu
+                  purus.
+                  Suspendisse pharetra quis quam id auctor. Pellentesque feugiat venenatis urna, vitae suscipit enim
+                  volutpat
+                  vitae. Nunc egestas tortor est, at sodales ligula auctor efficitur.
+                </article>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="commit-post">
+
+          <div id="qq">
+            <p>有什么新鲜想法告诉大家?</p>
+            <div class="message" contentEditable='true'></div>
+            <div class="But">
+              <img src="./src/img/face/bba_thumb.gif" class='bq' />
+              <span class='submit'>发表</span>
+              <!--face begin-->
+              <div class="face">
+                <ul>
+                  <li><img src="./src/img/face/smilea_thumb.gif" title="呵呵]"></li>
+                  <li><img src="./src/img/face/tootha_thumb.gif" title="嘻嘻]"></li>
+                  <li><img src="./src/img/face/laugh.gif" title="[哈哈]"></li>
+                  <li><img src="./src/img/face/tza_thumb.gif" title="[可爱]"></li>
+                  <li><img src="./src/img/face/kl_thumb.gif" title="[可怜]"></li>
+                  <li><img src="./src/img/face/kbsa_thumb.gif" title="[挖鼻屎]"></li>
+                  <li><img src="./src/img/face/cj_thumb.gif" title="[吃惊]"></li>
+                  <li><img src="./src/img/face/shamea_thumb.gif" title="[害羞]"></li>
+                  <li><img src="./src/img/face/zy_thumb.gif" title="[挤眼]"></li>
+                  <li><img src="./src/img/face/bz_thumb.gif" title="[闭嘴]"></li>
+                  <li><img src="./src/img/face/bs2_thumb.gif" title="[鄙视]"></li>
+                  <li><img src="./src/img/face/lovea_thumb.gif" title="[爱你]"></li>
+                  <li><img src="./src/img/face/sada_thumb.gif" title="[泪]"></li>
+                  <li><img src="./src/img/face/heia_thumb.gif" title="[偷笑]"></li>
+                  <li><img src="./src/img/face/qq_thumb.gif" title="[亲亲]"></li>
+                  <li><img src="./src/img/face/sb_thumb.gif" title="[生病]"></li>
+                  <li><img src="./src/img/face/mb_thumb.gif" title="[太开心]"></li>
+                  <li><img src="./src/img/face/ldln_thumb.gif" title="[懒得理你]"></li>
+                  <li><img src="./src/img/face/yhh_thumb.gif" title="[右哼哼]"></li>
+                  <li><img src="./src/img/face/zhh_thumb.gif" title="[左哼哼]"></li>
+                  <li><img src="./src/img/face/x_thumb.gif" title="[嘘]"></li>
+                  <li><img src="./src/img/face/cry.gif" title="[衰]"></li>
+                  <li><img src="./src/img/face/wq_thumb.gif" title="[委屈]"></li>
+                  <li><img src="./src/img/face/t_thumb.gif" title="[吐]"></li>
+                  <li><img src="./src/img/face/k_thumb.gif" title="[打哈气]"></li>
+                  <li><img src="./src/img/face/bba_thumb.gif" title="[抱抱]"></li>
+                  <li><img src="./src/img/face/angrya_thumb.gif" title="[怒]"></li>
+                  <li><img src="./src/img/face/yw_thumb.gif" title="[疑问]"></li>
+                  <li><img src="./src/img/face/cza_thumb.gif" title="[馋嘴]"></li>
+                  <li><img src="./src/img/face/88_thumb.gif" title="[拜拜]"></li>
+                  <li><img src="./src/img/face/sk_thumb.gif" title="[思考]"></li>
+                  <li><img src="./src/img/face/sweata_thumb.gif" title="[汗]"></li>
+                  <li><img src="./src/img/face/sleepya_thumb.gif" title="[困]"></li>
+                  <li><img src="./src/img/face/sleepa_thumb.gif" title="[睡觉]"></li>
+                  <li><img src="./src/img/face/money_thumb.gif" title="[钱]"></li>
+                  <li><img src="./src/img/face/sw_thumb.gif" title="[失望]"></li>
+                  <li><img src="./src/img/face/cool_thumb.gif" title="[酷]"></li>
+                  <li><img src="./src/img/face/hsa_thumb.gif" title="[花心]"></li>
+                  <li><img src="./src/img/face/hatea_thumb.gif" title="[哼]"></li>
+                  <li><img src="./src/img/face/gza_thumb.gif" title="[鼓掌]"></li>
+                  <li><img src="./src/img/face/dizzya_thumb.gif" title="[晕]"></li>
+                  <li><img src="./src/img/face/bs_thumb.gif" title="[悲伤]"></li>
+
+
+                </ul>
+              </div>
+              <!--face end-->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="col-4">
+
+      <div class="widget-feat">
+        <ul class="ul-inline">
+          <li><img src="./src/img/icon/applaud.png" alt=""><br>1024</li>
+          <li><img src="./src/img/icon/comment.png" alt=""><br>1024</li>
+          <li><img src="./src/img/icon/view.png" alt=""><br>1024</li>
+          <li><img src="./src/img/icon/share.png" alt=""><br>1024</li>
+        </ul>
+      </div>
+
+      <div class="forum-widget-users">
+        <h2> 石村论坛贡献榜 </h2>
+        <ul>
+          <a href="">
+            <li class="widget-user">
+              <img src="../../data/por/por_0.jpg" alt="user">
+              <div class="user-infor">
+                <h3>name</h3>
+                <h3>简介</h3>
+              </div>
+              <span class="widget">23121</span>
+            </li>
+          </a>
+          <a href="">
+            <li class="widget-user">
+              <img src="../../data/por/por_0.jpg" alt="user">
+              <div class="user-infor">
+                <h3>name</h3>
+                <h3>简介</h3>
+              </div>
+              <span class="widget">17131</span>
+            </li>
+          </a>
+          <a href="">
+            <li class="widget-user">
+              <img src="../../data/por/por_0.jpg" alt="user">
+              <div class="user-infor">
+                <h3>name</h3>
+                <h3>简介</h3>
+              </div>
+              <span class="widget">12131</span>
+            </li>
+          </a>
+          <a href="">
+            <li class="widget-user">
+              <img src="../../data/por/por_0.jpg" alt="user">
+              <div class="user-infor">
+                <h3>name</h3>
+                <h3>简介</h3>
+              </div>
+              <span class="widget">9999</span>
+            </li>
+          </a>
+        </ul>
+      </div>
+    </div>
+  </main>
+  <br><br><br>
+  <footer>
+    <ul class="ul-inline">
+      <li><a href="#" title="">帮助</a></li>
+      <li><a href="#" title="">隐私策略</a></li>
+      <li><a href="#" title="">社区原则</a></li>
+      <li><a href="#" title="">划水政策</a></li>
+      <li><a href="#" title="">我们</a></li>
+      <li><a href="#" title="">论坛</a></li>
+      <li><a href="#" title="">语言</a></li>
+      <li><a href="#" title="">版权相关</a></li>
+    </ul>
+    <p><img src="./src/img/icon/copyright.png" alt="">&nbsp;版权 2019</p>
+    <img src="./src/img/logo.png" alt="logo">&nbsp;石村论坛
+  </footer>
+
+  <div id="question-box" class="question-box" style="display: none;">
+    <div class="overview-edit">
+      <h3>发表帖子</h3>
+      <form action="" method="POST">
+        <input type="text" name="question" required placeholder="标题">
+        <input type="text" name="tags" placeholder="标签：#路线 #旅志">
+        <textarea placeholder="描述..." name="describe"></textarea>
+        <button type="submit" id="save">提 交</button>
+        <button type="submit" id="cancel">取 消</button>
+      </form>
+      <a href="#" title="关闭" id="close-box" class="close-box"><i class="la la-close"></i></a>
+    </div>
+  </div>
+  <iframe id="entry" style="position: fixed;width: 100vw;height: 100vh;top: 0;left: 0;visibility: hidden" src="../userEntry/login.html" frameborder="0"></iframe>
+</body>
+<script>
+  $(document).ready(function () {
+
+    //评论初始化
+    commitInit();
+
+    // 二级导航栏初始化
+    $(".forum-sec .container ul li")[0].click();
+
+    // 发帖相关
+    $("#ask-question").click(function () {
+      $("#question-box").fadeIn();
+    })
+    $("#close-box").click(function () {
+      $("#question-box").fadeOut("fast");
+    })
+    $("#cancel").click(function () {
+      $("#question-box").fadeOut("fast");
+    })
+
+  })
+
+  function showNotice() {
+
+    // 通知栏
+    if (document.getElementById("notice-show").style.display == "inline-block") {
+      $("#notice-show").hide();
+      $($(".notice")[0]).hide();
+      return;
+    }
+
+    $(".notice")[0].style.display = "block"
+    document.getElementById("notice-show").style.display = "inline-block"
+  }
+
+  function refreshPages(index) {
+
+  }
+
+  function moveVernier(width, left, name) { //移动二级导航游标
+
+    let vernier = $(`${name?name:"#forum-sec-vernier"}`)
+
+    vernier.width(width)
+    vernier.css("left", left)
+  }
+
+  $(".forum-sec .container ul li").each(function (index) { //二级导航点击事件绑定
+
+    this.addEventListener("click", function (e) {
+
+      e = $(e.target)
+
+      let width = e.width()
+      let left = e.offset().left
+
+      moveVernier(width, left);
+      refreshPages(index);
+    })
+  })
+
+  function commitInit() {
+    //点击小图片，显示表情
+    $(".bq").click(function (e) {
+      $(".face").slideDown(); //慢慢向下展开
+      e.stopPropagation(); //阻止冒泡事件
+    });
+
+    //在桌面任意地方点击，关闭表情框
+    $(document).click(function () {
+      $(".face").slideUp(); //慢慢向上收
+    });
+
+    //点击小图标时，添加功能
+    $(".face ul li").click(function () {
+      let simg = $(this).find("img").clone();
+      $(".message").append(simg); //将表情添加到输入框
+    });
+
+    //点击发表按扭，发表内容
+    $("span.submit").click(function () {
+      let txt = $(".message").html(); //获取输入框内容
+      if (!txt) {
+        $('.message').focus(); //自动获取焦点
+        return;
+      }
+      let obj = {
+        msg: txt
+      }
+      $('.message').html('') // 清空输入框
+
+    });
+
+    //删除当前数据
+    $("body").on('click', '.del', function () {
+      let index = $(this).parent().parent().index();
+      msgBoxList.splice(index, 1)
+      window.localStorage.setItem('msgBoxList', JSON.stringify(msgBoxList)) //将数据保存到缓存
+      $(this).parent().parent().remove()
+    })
+  }
+</script>
+<script src="../Public_Assets/js/home.js"></script>
+</html>

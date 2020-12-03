@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>forum</title>
+  <link rel="stylesheet" href="../home/css/sideNav.css">
+</head>
+<script src="../userEntry/js/init.js"></script>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    outline: none;
+  }
+@font-face {
+  font-family: 'fz';
+  src: url("./FZLTCXHJW.woff");
+}
+  :root {
+    background-color: #D7CCAE;
+  }
+
+  /* menu */
+  #menu {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    font-size: 20px;
+    background: white;
+    opacity: 0.7;
+    font-family: 'lnkfree';
+    transition: all 0.3s;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    visibility: hidden;
+  }
+
+  #menu:active {
+    opacity: 0.5;
+  }
+
+  /* ———————————————————————————————————————— */
+  .head {
+    position: fixed;
+    height: 90px;
+    width: 100%;
+    top: 0;
+    background-color: #D7CCAE;
+    border-bottom: 1px #9B947C solid
+  }
+
+  .articleList {
+    display: block;
+    position: relative;
+    margin-top: 91px;
+    height: calc(100vh - 130px);
+    width: 100%;
+    background-color: #D7CCAE;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 50px calc((100% - 900px)/2);
+    padding-top: 20px;
+    padding-bottom: 60px;
+    list-style: none;
+  }
+
+  .articleList::before {
+    content: "";
+    display: block;
+    width: 2px;
+    height: calc(100% - 50px);
+    position: absolute;
+    background-color: whitesmoke;
+    margin: 20px 0;
+    transform: translateX(-40px)
+  }
+
+  .articleList::after {
+    content: "";
+    display: block;
+    width: 2px;
+    top: 20px;
+    height: calc(100% - 50px);
+    position: absolute;
+    background-color: whitesmoke;
+    margin: 20px 0;
+    transform: translateX(940px)
+  }
+
+  .nav {
+    margin-left: 50px;
+  }
+
+  .nav button {
+    padding: 2px 5px;
+    font-size: 20px;
+    outline: none;
+    background: transparent;
+    border: #9B947C 3px solid;
+    font-weight: 100
+  }
+  .nav button:nth-child(1){
+    border: whitesmoke 5px solid;
+    color: whitesmoke
+  }
+  .content {
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    border: 5px whitesmoke solid;
+    box-sizing: border-box;
+    padding: 20px;
+    overflow: scroll;
+  }
+
+  .content::-webkit-scrollbar {
+    display: none
+  }
+
+  .content li {
+    border-bottom: whitesmoke 2px solid;
+    display: block;
+    width: 100%;
+    height: 60px;
+    margin-top: 20px;
+    /* cursor: pointer; */
+  }
+
+  .text:hover {
+    opacity: 0.5
+  }
+
+  .content li a span {
+    display: inline-block;
+    float: left;
+    width: 56px;
+    height: 56px;
+    border-radius: 28px;
+    /* border: whitesmoke 1px solid; */
+    background:no-repeat center center;
+    background-size: cover;
+  }
+
+  .text {
+    float: left;
+    padding-left: 20px;
+    cursor: pointer;
+  }
+  .text span{
+    font-weight: 200
+  }
+  .text span,
+  p {
+    display: inline;
+    line-height: 28px;
+  }
+
+  #add {
+    display: block;
+    position: absolute;
+    background: center center url("./img/add.png") no-repeat;
+    background-size: cover;
+    width: 40px;
+    height: 60px;
+    transform: translate(920px, 50px);
+    z-index: 999;
+    cursor: pointer;
+  }
+
+  #nothing {
+    display: block;
+    position: absolute;
+    background: center center url("./img/nothing.png") no-repeat;
+    background-size: cover;
+    width: 40px;
+    height: 60px;
+    transform: translate(-60px, 350px);
+    z-index: 999;
+  }
+
+  .ques {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: transparent;
+    transition: all 0.5s;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999999;
+    transform: scale(0, 0)
+  }
+</style>
+
+<body>
+  <header class="head">
+      <a href="../home/home.html"><img src="../logo.png" style="position: absolute; left: 47px; top: -10px; transform: scale(0.63,0.63)" alt="logo"></a>
+      <h1 style="margin-left: 280px;margin-top: 20px;font-family: fz;font-size: 50px;letter-spacing: 10px;font-weight: 100">石村论坛</h1>
+  </header>
+  <ul class="articleList">
+    <nav class="nav">
+      <button>最&nbsp;新</button><button>热&nbsp;度</button>
+    </nav>
+    <span id="add"></span>
+    <span id="nothing"></span>
+    <div class="content">
+      <!-- <li>
+        <a href="用户主页"><span style="background-image: url('')"></span></a>
+        <div class="text">
+          <span>小猪猪</span><br>
+          <p>啊啊啊啊啊啊我是谁我在哪二</p>
+        </div>
+      </li> -->
+    </div>
+  </ul>
+  <iframe class="ques" src="./speech.html#question" frameborder="0"></iframe>
+  <button id="menu">MENU</button>
+  <aside style="transform: translateX( 208px );z-index: 999;" class="stone-side right">
+    <button class="btn-side fewer ">
+      <span class="hamb-top"></span>
+      <span class="hamb-middle"></span>
+      <span class="hamb-bottom"></span>
+    </button>
+    <nav class="stone-nav">
+      <ul class="stone-nav-list">
+        <li><a id="home" href="../home/home.html">石村</a></li>
+        <li><a id="user" href="../userEntry/login.html">登陆/注册</a></li>
+        <li><a id="main" href="../about/about.html">简介</a></li>
+        <li><a id="stone" href="../stone/stone.html">石头</a></li>
+        <li><a id="main_part" href="../main-part/main_part.html">石村风情</a></li>
+        <li><a id="forum" href="../forum/forum.html">论坛</a></li>
+        <li><a id="build" href="../Minecraft/index.html">我的石村</a></li>
+        <li><a id="help" href="#">帮助</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <iframe id="entry" style="position: fixed;width: 100vw;height: 100vh;top: 0;left: 0;visibility: hidden;z-index: 9999;" src="../userEntry/login.html" frameborder="0"></iframe>
+</body>
+<script src="../home/js/home.js"></script>
+<script>
+
+  var req = new XMLHttpRequest()
+  req.onreadystatechange = function () {
+    if (req.readyState == 4 && req.status == 200) {
+
+      var res = JSON.parse(req.responseText);
+      if(res.code == 1){
+        let questions = JSON.parse(res.data)
+        let cont = document.getElementsByClassName("content")[0]
+        questions.forEach(e => {
+          cont.appendChild( createContainer(e.user.por,e.user.name,e.question,e.time))
+        });
+      }
+    }
+  }
+  req.withCredentials = true;
+  req.open('get', `http://localhost:3160/forum/getQuestions`);
+  req.send(null);
+
+  function createContainer(url,name,content,order){
+
+    let li = document.createElement("li")
+    let a = document.createElement("a")
+    let span1 = document.createElement("span")
+    let div = document.createElement("div")
+    let span2 = document.createElement("span")
+    let br = document.createElement("br")
+    let p = document.createElement("p")
+
+    a.href = "http://localhost:3160/shicun/user/user.html?name="+name
+    span1.style.backgroundImage = `url('http://localhost:3160/data/por/${url}')`
+    div.classList.add("text")
+    span2.innerText = name
+    p.innerText = content
+
+    a.appendChild(span1)
+    div.appendChild(span2)
+    div.appendChild(br)
+    div.appendChild(p)
+    li.appendChild(a)
+    li.appendChild(div)
+
+    div.addEventListener("click",()=>{
+      window.location.href = "http://localhost:3160/shicun/forum/forumItem.html?order="+order
+      window.reload();
+    })
+
+    return li
+
+  }
+</script>
+<script>
+  document.getElementById("add").addEventListener("click", function () {
+    if (!window.client) {
+      return alert("请先登录！")
+    }
+    document.getElementsByTagName("iframe")[0].style.transform = "scale(1,1)"
+  })
+  window.closeIframe = function (reload) {
+    document.getElementsByTagName("iframe")[0].style.transform = "scale(0,0)"
+    if (reload) {
+      setTimeout(() => {
+        location.reload();
+      }, 500);
+    }
+  }
+</script>
+
+</html>

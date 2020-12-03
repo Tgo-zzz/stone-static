@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>user</title>
+  <link rel="stylesheet" href="./css/user.css">
+  <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="cropper/cropper.min.css" rel="stylesheet">
+  <link href="sitelogo/sitelogo.css" rel="stylesheet">
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="sitelogo/sitelogo.js"></script>
+</head>
+<script src="../userEntry/js/init.js"></script>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+</style>
+
+<body>
+  <aside class="stone-aside-user">
+    <div class="portraitBox">
+      <span class="portrait" style="background-image: url('./img/user.png')"></span>
+      <div class="userName">用户名</div>
+    </div>
+    <ul>
+        <a href="./user2.html#infor">
+          <li>详细资料</li>
+        </a>
+        <a href="./user.html">
+        <li>论坛消息</li>
+      </a>
+    </ul>
+    <a class="home" href="../home/home.html"><img src="./img/back.png" alt="返回主页"></a>
+  </aside>
+  <main>
+    <section class="part3">
+      <form class="user" action="" method="post">
+        <a name="infor">&nbsp;</a>
+        <div id="file">
+          <!-- <img src="./img/user.png" alt="头像">
+          <input type="file" name="portrait" accept=".png, .jpg, .jpeg"> -->
+          <div class="ibox-content">
+            <div class="row">
+              <div id="crop-avatar" class="col-md-6">
+                <div class="avatar-view" style="transform: scale(0.7,0.7)">
+                  <img src="logo.jpg" style="height: 100%;width:100%" alt="Logo">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label for="nickname">昵&nbsp;&nbsp;称&nbsp;&nbsp;</label>
+          <input id="nickname" type="text" name="nickname">
+        </div>
+        <br>
+        <div>
+          <label for="sex">性&nbsp;&nbsp;别&nbsp;&nbsp;</label>
+          <input type="text" id="sex" name="sex">
+          <input class="check" name="man" type="button" value="男♂">
+          <input class="check" name="women" type="button" value="女♀">
+          <input class="check" name="nosex" type="button" value="保密">
+        </div>
+        <br>
+        <div>
+          <label for="birth">生&nbsp;&nbsp;日&nbsp;&nbsp;</label>
+          <input id="birth" type="date">
+        </div>
+        <br>
+        <div>
+          <label for="id">用户名</label>
+          <input id="tel" type="text" disabled value="13735866541">
+        </div>
+        <br>
+        <div id="stone">
+          <input name="isStone" value="1" type="radio"><label for="isStone"></label>石村人&nbsp;
+          <input name="isStone" value="0" type="radio"><label for="isStone"></label>非石村人
+        </div>
+        <br>
+        <div>
+          <label for="about">个人介绍</label>
+          <br>
+          <br>
+          <textarea id="about" name="about" cols="40" rows="5"></textarea>
+        </div>
+        <br>
+        <button id="post" type="submit">修改信息</button>
+      </form>
+    </section>
+  </main>
+
+
+
+
+
+
+
+
+
+  <!-- 弹窗,填写上传地址 -->
+  <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog"
+    tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form class="avatar-form" action="{{url('admin/upload-logo')}}" enctype="multipart/form-data" method="post">
+          <div class="modal-header">
+            <button class="close" data-dismiss="modal" type="button">&times;</button>
+            <h4 class="modal-title" id="avatar-modal-label">选择头像</h4>
+          </div>
+          <div class="modal-body">
+            <div class="avatar-body">
+              <div class="avatar-upload">
+                <input class="avatar-src" name="avatar_src" type="hidden">
+                <input class="avatar-data" name="avatar_data" type="hidden">
+                <label for="avatarInput">图片上传</label>
+                <input class="avatar-input" id="avatarInput" name="avatar_file" type="file"></div>
+              <div class="row">
+                <div class="col-md-9">
+                  <div class="avatar-wrapper"></div>
+                </div>
+                <div class="col-md-3">
+                  <div class="avatar-preview preview-lg"></div>
+                  <div class="avatar-preview preview-md"></div>
+                  <div class="avatar-preview preview-sm"></div>
+                </div>
+              </div>
+              <div class="row avatar-btns">
+                <div class="col-md-9">
+                  <div class="btn-group">
+                    <button class="btn" data-method="rotate" data-option="-90" type="button"
+                      title="Rotate -90 degrees"><i class="fa fa-undo"></i> 向左旋转</button>
+                  </div>
+                  <div class="btn-group">
+                    <button class="btn" data-method="rotate" data-option="90" type="button" title="Rotate 90 degrees"><i
+                        class="fa fa-repeat"></i> 向右旋转</button>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <button class="btn btn-success btn-block avatar-save" type="submit"><i class="fa fa-save"></i>
+                    保存修改</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+  <script type="text/javascript" src="js/custom.js"></script>
+  <script>
+    let sexes = document.getElementsByClassName("check")
+    let sex = document.getElementById("sex")
+    for (let i = 0; i < sexes.length; i++) {
+      sexes[i].addEventListener("click", function (e) {
+        for (let i = 0; i < sexes.length; i++) {
+          sexes[i].style.backgroundColor = "whitesmoke"
+          e.target.style.color = "black"
+        }
+        e.target.style.backgroundColor = "rgba(134,119,167,0.55)"
+        e.target.style.color = "whitesomke"
+        sex.value = e.target.value
+      })
+    }
+  </script>
+</body>
+
+</html>

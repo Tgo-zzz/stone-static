@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>一维柏林噪声</title>
+</head>
+
+<body>
+  <canvas id="noise"></canvas>
+</body>
+<script>
+  //种子
+  Math.seed = 5;
+
+  // 种子生成随机数
+  Math.seededRandom = function (max, min) {
+    max = max || 1;
+    min = min || 0;
+    Math.seed = (Math.seed * 9301 + 49297) % 233280;
+    var rnd = Math.seed / 233280.0;
+    return min + rnd * (max - min);
+  };
+
+  let canvas = document.getElementById('noise')
+  canvas.height = 400
+  canvas.width = 300
+  let ctx = canvas.getContext('2d')
+  ctx.fillStyle = "#000000"
+
+  let noise = Noise(300, 5, 1/4, 5);
+
+  noise.forEach((e, index) => {
+    draw(index, e)
+  });
+
+
+
+  function Noise(OverLen, frequency, persistence = 1, octaves = 1, amplitude = 1, parentNoise) {
+    // OverLen 总长度
+    // frequency 频率
+    // persistence 持续度
+    // octaves 倍频
+    // amplitude 振幅
+    // 上一级噪声
+    // 获取波长
+    let wavelength = parseInt(OverLen / frequency)
+    let noise = []
+
+    // 条件判断
+    if (frequency < 2) {
+      console.warn("频率过低")
+      return;
+    }
+    if(wavelength<1){
+      console.log("单位点精度不足，已返回柏林噪声，当前倍频："+octaves);
+      return;
+    }
+    if (octaves == 0) {
+      console.log("柏林噪声计算完毕")
+      return;
+    } else {
+      octaves--
+    }
+
+
+    // 生成顶点噪声
+    for (let i = 0; i < OverLen; i += wavelength) {
+      noise[i] = Math.seededRandom() * amplitude
+    }
+    noise[OverLen] = Math.seededRandom()
+
+    // 插值计算
+    let y1 = noise[0]
+    let y2 = noise[wavelength]
+
+    for (let j = 1; j < OverLen; j++) {
+      if (j / wavelength % 1 != 0) {
+        if (parentNoise) {
+          parentNoise[j] += Cosine_Interpolate(y1, y2, j / wavelength % 1)
+        } else {
+          noise[j] = Cosine_Interpolate(y1, y2, j / wavelength % 1)
+        }
+      } else {
+        y1 = y2
+        y2 = noise[(parseInt(j / wavelength) + 1) * wavelength > OverLen ? OverLen : (parseInt(j / wavelength) + 1) * wavelength]
+        if (parentNoise) {
+          parentNoise[j] += y1
+        }
+      }
+    }
+
+    Noise(OverLen, frequency / persistence, persistence, octaves, amplitude * persistence, noise)
+
+    return noise
+
+  }
+
+  // 绘制单位点
+  function draw(x, y) {
+    let top = (1 - y) * 150
+    ctx.fillRect(x, top+200, 1, y)
+  }
+
+  // 余弦插值
+  function Cosine_Interpolate(y1, y2, x) {
+    let ft = x * Math.PI
+    let f = (1 - Math.cos(ft)) * 0.5
+    return y1 * (1 - f) + y2 * f
+  }
+
+  // 线性插值
+  function Linear_Interpolate(y1, y2, x) {
+    return y1 * (1 - x) + y2 * x
+  }
+
+  // 归一化
+  function normalizing(x, y) {
+    let len = Math.sqrt(x * x + y * y)
+    x = x / len
+    y = y / len
+    return {
+      x,
+      y
+    }
+  }
+</script>
+
+</html>

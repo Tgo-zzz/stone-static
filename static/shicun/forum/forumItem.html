@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>forumItem</title>
+</head>
+<script src="../userEntry/js/init.js"></script>
+<style>
+  * {
+    margin: 0;
+    padding: 0
+  }
+  @font-face {
+  font-family: 'fz';
+  src: url("./FZLTCXHJW.woff");
+}
+  .head {
+    position: fixed;
+    height: 270px;
+    width: 100%;
+    top: 0;
+    background-color: #D7CCAE;
+    border-bottom: 1px #9B947C solid
+  }
+
+  .headline {
+    margin: 0 90px;
+    margin-top: 270px;
+    height: 80px;
+    width: calc(80% - 180px);
+    border-bottom: 2px #9B947C solid;
+    padding: 5px 10%;
+  }
+
+  .headline span {
+    display: block;
+    height: 90px;
+    width: 90px;
+    border: 2px #448ACA solid;
+    border-radius: 45px;
+    transform: scale(0.8, 0.8);
+    background: no-repeat center center;
+    background-size: cover;
+    float: left;
+  }
+
+  .headline p {
+    display: block;
+    height: 50%;
+    width: calc(100% - 94px);
+    line-height: 50%;
+    float: right;
+    font-size: 24px;
+    box-sizing: border-box;
+    padding: 20px 10px
+  }
+
+  .content {
+    position: relative;
+    margin: 0 calc(180px + 10%);
+    list-style: none;
+  }
+
+  .content li {
+    margin-top: 20px;
+    background: #D7CCAE;
+    position: relative;
+    min-height: 50px;
+    border-radius: 5px;
+    box-shadow: rgba(233, 222, 194, 0.459) 5px 5px 3px 3px
+  }
+
+  .text {
+    margin-top: 20px;
+    padding: 25px 60px 10px 60px;
+  }
+
+  .portrait {
+    display: block;
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    border: 2px solid #A50000;
+    border-radius: 25px;
+    background: no-repeat center center;
+    background-size: cover;
+    top: 3px;
+    left: 3px
+  }
+
+  .like {
+    display: block;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    bottom: 3px;
+    right: 3px;
+    background: url("./img/like.png") center center no-repeat;
+    background-size: auto 100%;
+    transform: scale(0.7, 0.7);
+    cursor: pointer;
+  }
+
+  .answ {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: transparent;
+    transition: all 0.5s;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999999;
+    transform: scale(0, 0)
+  }
+
+  #speech {
+    position: fixed;
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: url("./img/speech.png") center center no-repeat;
+    background-size: cover;
+    bottom: 50px;
+    right: 50px;
+    z-index: 99999;
+    cursor: pointer;
+  }
+
+  #speech:hover {
+    opacity: 0.5
+  }
+</style>
+
+<body>
+  <header class="head">
+      <a href="../home/home.html"><img src="../logo.png" style="position: absolute; left: 47px; top: -10px; transform: scale(0.63,0.63)" alt="logo"></a>
+      <h1 style="margin-left: 280px;margin-top: 20px;font-family: fz;font-size: 50px;letter-spacing: 10px;font-weight: 100">石村论坛</h1>
+  </header>
+  <section class="headline">
+    <span id="tou" style="background-image: url()"></span>
+    <p id="name">名字</p>
+    <br>
+    <p id="question">问题</p>
+  </section>
+  <ul class="content">
+  </ul>
+  <span id="speech"></span>
+  <iframe class="answ" src="./speech.html#answer" frameborder="0"></iframe>
+  <iframe id="entry" style="position: fixed;width: 100vw;height: 100vh;top: 0;left: 0;visibility: hidden;z-index: 9999;"
+    src="../userEntry/login.html" frameborder="0"></iframe>
+</body>
+<script>
+
+  var req = new XMLHttpRequest()
+
+  req.onreadystatechange = function () {
+    if (req.readyState == 4 && req.status == 200) {
+
+      var res = JSON.parse(req.responseText);
+      
+      document.getElementById("tou").style.backgroundImage = `url('http://localhost:3160/data/por/${res.question.user.por}')`
+      document.getElementById("name").innerText = res.question.user.name
+      document.getElementById("question").innerText = res.question.question
+
+      if (res.code == 1) {
+        let answers = res.data
+        let content = document.getElementsByClassName("content")[0]
+        answers.forEach(e => {
+          let text = e.answer
+          let li = document.createElement("li")
+          li.innerHTML = `
+            <span class="portrait" style="background-image:url('http://localhost:3160/data/por/${e.user.por}')"></span>
+            <p class="text">${text}</p>
+            <span class="like"></span>
+          `
+          content.appendChild(li)
+        });
+      }
+
+    }
+  }
+  req.withCredentials = true;
+  req.open('get', `http://localhost:3160/forum/getAnswers${window.location.search}`, false);
+  req.send(null);
+
+  document.getElementById("speech").addEventListener("click", function () {
+    if (!window.client) {
+      setTimeout(() => {
+        document.getElementById("entry").style.visibility = "visible"
+      }, 500);
+      return alert("请先登录！")
+    }
+    document.getElementsByTagName("iframe")[0].style.transform = "scale(1,1)"
+  })
+  window.closeIframe = function (reload) {
+    document.getElementsByTagName("iframe")[0].style.transform = "scale(0,0)"
+    if (reload) {
+      setTimeout(() => {
+        location.reload();
+      }, 500);
+    }
+  }
+</script>
+
+</html>

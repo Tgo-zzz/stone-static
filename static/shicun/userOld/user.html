@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>user</title>
+  <link rel="stylesheet" href="./css/user.css">
+</head>
+<script src="../userEntry/js/init.js"></script>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+</style>
+
+<body>
+  <aside class="stone-aside-user">
+    <div class="portraitBox">
+      <span class="portrait" style="background-image: url('./img/user.png')"></span>
+      <div class="userName">用户名</div>
+    </div>
+    <ul>
+      <a href="#infor">
+        <li>详细资料</li>
+      </a>
+      <a href="">
+        <li>论坛消息</li>
+      </a>
+    </ul>
+    <a class="home" href="../home/home.html"><img src="./img/back.png" alt="返回主页"></a>
+  </aside>
+  <main>
+    <section class="part1">
+      <h1 class="">我发布的消息</h1>
+      <ul>
+        <li>
+          有谁知道石头村博物馆几点开门嘛?
+          <br> <i>
+            <script>
+              document.write(new Date().getMilliseconds())
+            </script>
+          </i>
+          <span>1</span>
+        </li>
+        <li>
+          有谁知道石头村
+          <br> <i>time</i>
+        </li>
+        <li>
+          aaaa
+          <br> <i>time</i>
+        </li>
+        <li>
+          有谁知道石头村博物馆几点开门嘛?有谁知道石头村博物馆几点开门嘛?
+          <br> <i>time</i>
+        </li>
+        <li>
+          有谁知道石头村博物馆几点开门嘛?有谁知道石头村博物馆几点开门嘛?
+          <br> <i>time</i>
+        </li>
+        <li>
+          有谁知道石头村博物馆几点开门嘛?有谁知道石头村博物馆几点开门嘛?
+          <br> <i>time</i>
+        </li>
+        <li>
+          有谁知道石头村博物馆几点开门嘛?有谁知道石头村博物馆几点开门嘛?
+          <br> <i>time</i>
+        </li>
+        <li>
+          有谁知道石头村博物馆几点开门嘛?有谁知道石头村博物馆几点开门嘛?
+          <br> <i>time</i>
+        </li>
+        <li>
+          有谁知道石头村博物馆几点开门嘛?有谁知道石头村博物馆几点开门嘛?
+          <br> <i>time</i>
+        </li>
+        <li>
+          有谁知道石头村博物馆几点开门嘛?有谁知道石头村博物馆几点开门嘛?
+          <br> <i>time</i>
+        </li>
+        <li>
+          有谁知道石头村博物馆几点开门嘛?有谁知道石头村博物馆几点开门嘛?
+          <br> <i>time</i>
+        </li>
+        <li>
+          aaaa
+          <br> <i>time</i>
+        </li>
+      </ul>
+    </section>
+    <section class="part2">
+      <h1>我回复的消息</h1>
+      <ul>
+        <li>
+          aaaa
+          <br> <i>time</i>
+        </li>
+        <li>
+          aaaa
+          <br> <i>time</i>
+        </li>
+        <li>a</li>
+        <li>
+          有谁知道石头村博物馆几点开门嘛?有谁知道石头村博物馆几点开门嘛?
+          <br> <i>time</i>
+        </li>
+      </ul>
+      <a class="toForum" href="../forum/forum.html">进入论坛</a>
+    </section>
+    <section class="part3">
+      <form class="user" action="" method="post">
+        <a name="infor">&nbsp;</a>
+        <div id="file">
+          <img src="./img/user.png" alt="头像">
+          <input type="file" name="portrait" accept=".png, .jpg, .jpeg">
+        </div>
+        <div>
+          <label for="nickname">昵&nbsp;&nbsp;称&nbsp;&nbsp;</label>
+          <input id="nickname" type="text" name="nickname">
+        </div>
+        <br>
+        <div>
+          <label for="sex">性&nbsp;&nbsp;别&nbsp;&nbsp;</label>
+          <input type="text" id="sex" name="sex">
+          <input class="check" name="man" type="button" value="男♂">
+          <input class="check" name="women" type="button" value="女♀">
+          <input class="check" name="nosex" type="button" value="保密">
+        </div>
+        <br>
+        <div>
+          <label for="birth">生&nbsp;&nbsp;日&nbsp;&nbsp;</label>
+          <input id="birth" type="date">
+        </div>
+        <br>
+        <div>
+          <label for="id">用户名</label>
+          <input id="tel" type="text" disabled value="13735866541">
+        </div>
+        <br>
+        <div id="stone">
+         <input name="isStone" value="1" type="radio"><label for="isStone"></label>石村人&nbsp; 
+         <input name="isStone" value="0" type="radio"><label for="isStone"></label>非石村人
+        </div>
+        <br>
+        <div>
+          <label for="about">个人介绍</label>
+          <br>
+          <br>
+          <textarea id="about" name="about" cols="40" rows="5"></textarea>
+        </div>
+        <br>
+        <button id="post" type="submit">修改信息</button>
+      </form>
+    </section>
+  </main>
+<script>
+  let sexes = document.getElementsByClassName("check")
+  let sex = document.getElementById("sex")
+  for (let i = 0; i < sexes.length; i++) {
+    sexes[i].addEventListener("click", function(e){
+      for (let i = 0; i < sexes.length; i++) {
+        sexes[i].style.backgroundColor = "whitesmoke"
+        e.target.style.color = "black"
+      }
+      e.target.style.backgroundColor = "gray"
+      e.target.style.color = "whitesomke"
+      sex.value = e.target.value
+    })
+  }
+</script>
+</body>
+</html>

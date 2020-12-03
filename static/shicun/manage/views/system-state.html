@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edmin</title>
+    <link rel="stylesheet" type="text/css" href="./bootstrap/css/bootstrap.min.css">
+    <link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link type="text/css" href="css/theme.css" rel="stylesheet">
+    <link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
+    <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
+        rel='stylesheet'>
+</head>
+<style>
+    .logs {
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    }
+
+    .logs ul {
+        list-style: none;
+        width: 100%
+    }
+
+    .logs ul li {
+        width: 24%;
+        text-align: center;
+        display: inline-block;
+        margin: 25px 0;
+    }
+</style>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="content">
+
+                        <div class="module">
+                            <div class="module-head">
+                                <h3>
+                                    网络状态 </h3>
+                            </div>
+                            <div class="module-body">
+                                <div class="chart inline-legend grid">
+                                    <div id="placeholder2" class="graph">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <!--/.module-->
+                        <div class="module">
+                            <div class="module-head">
+                                <h3>
+                                    实时CPU数据 </h3>
+                            </div>
+                            <div class="module-body">
+                                <div class="chart">
+                                    <div id="placeholder" class="graph">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.module-->
+                        <br />
+                        <div class="module">
+                            <div class="module-head">
+                                <h3>
+                                    CPU平均使用情况</h3>
+                            </div>
+                            <div class="module-body">
+                                <div class="chart pie donut">
+                                    <div id="pie-default" class="graph">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.module-->
+                        <br />
+                        <div class="module">
+                            <div class="module-head">
+                                <h3>
+                                    当前内存占用</h3>
+                            </div>
+                            <div class="module-body">
+                                <div class="chart pie donut">
+                                    <div id="pie-donut" class="graph">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.module-->
+                        <br />
+                        <div class="module">
+                            <div class="module-head">
+                                <h3>
+                                    外存占用</h3>
+                            </div>
+                            <div class="module-body">
+                                <div class="chart pie donut interactive">
+                                    <div id="pie-interactive" class="graph">
+                                    </div>
+                                    <div id="hover">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.module-->
+                    </div>
+                    <!--/.content-->
+                </div>
+                <!--/.span9-->
+            </div>
+            <section class="logs">
+                <div class="module-head">
+                    <h3>
+                        日志</h3>
+                </div>
+                <ul>
+                    <li><img src="../img/file.png" alt="file"><br>2019-9-18</li>
+                    <li><img src="../img/file.png" alt="file"><br>2019-9-18</li>
+                    <li><img src="../img/file.png" alt="file"><br>2019-9-18</li>
+                    <li><img src="../img/file.png" alt="file"><br>2019-9-18</li>
+                    <li><img src="../img/file.png" alt="file"><br>2019-9-18</li>
+                    <li><img src="../img/file.png" alt="file"><br>2019-9-18</li>
+                    <li><img src="../img/file.png" alt="file"><br>2019-9-18</li>
+                    <li><img src="../img/file.png" alt="file"><br>2019-9-18</li>
+                </ul>
+            </section>
+        </div>
+        <!--/.container-->
+    </div>
+    <!--/.wrapper-->
+
+    <script src="scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="scripts/flot/jquery.flot.js" type="text/javascript"></script>
+    <script src="scripts/flot/jquery.flot.pie.js" type="text/javascript"></script>
+    <script src="scripts/common.js" type="text/javascript"></script>
+
+</body>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>给劳资肝</title>
+</head>
+<style>
+  body {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0
+  }
+
+  .lable label {
+    background-color: aliceblue
+  }
+
+  .show {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 50%;
+    height: 100%;
+    float: left;
+    position: relative;
+  }
+
+  .tool {
+    position: absolute;
+  }
+</style>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/three/build/three.min.js"></script>
+<script src="../node_modules/three/examples/js/controls/OrbitControls.js"></script>
+
+<body>
+  <div class="show">
+    <div class="tool">
+      <label>编号</label>
+      <input id="num" type="text" value="1">
+      <button id="goto">跳转</button>
+      <button id="previous">上一个</button>
+      <button id="next">下一个</button>
+      <button id="save">保存</button>
+      <label>重复</label>
+      <input id="tag" type="checkbox">
+      <br>
+      <label>可见范围</label>
+      <input id="visibleNum" type="text">
+      <button id="visibleChange">确认</button>
+      <br>
+      <label>预览</label>
+      <br>
+      <div id="preview">
+        <button class="preview">30</button><input type="checkbox" name="" id=""><br>
+        <button class="preview">30</button><input type="checkbox" name="" id=""><br>
+        <button class="preview">30</button><input type="checkbox" name="" id=""><br>
+        <button class="preview">30</button><input type="checkbox" name="" id=""><br>
+      </div>
+      <br>
+      <br>
+
+      <div id="point">
+        <button class="direction">插入指向</button>
+        <div class="lable">
+          <label>30</label><input class="size" type="range" max="1.8" min="0.2" step="0.05">
+        </div>
+        <br>
+        <button class="direction">插入指向</button>
+        <div class="lable">
+          <label>30</label><input class="size" type="range" max="1.8" min="0.2" step="0.05">
+        </div>
+        <br>
+        <button class="direction">插入指向</button>
+        <div class="lable">
+          <label>30</label><input class="size" type="range" max="1.8" min="0.2" step="0.05">
+        </div>
+        <br>
+        <button class="direction">插入指向</button>
+        <div class="lable">
+          <label>30</label><input class="size" type="range" max="1.8" min="0.2" step="0.05">
+        </div>
+        <br>
+      </div>
+
+    </div>
+  </div>
+  <div class="show">
+    <div class="tool">
+      <label>偏转</label>
+      <input id="deflection" type="text">
+      <button id="SaveDeflection">保存</button>
+      <br>
+    </div>
+  </div>
+</body>
+<script>
+  let IMG = {}
+  let viewOne = {}
+  let NUMBER = 1
+  let previewNum = 1
+  $.ajaxSettings.async = false;
+  $.getJSON('http://127.0.0.1:3160/view.json', (data) => {
+    IMG = data
+    viewOne = data.view.P1
+  })
+
+  /** ————————————————————————————————————————————————————————————割———————————————————————————————————————————————————————————————————— **/
+  /**
+   * 创建场景对象Scene
+   */
+  var scene1 = new THREE.Scene();
+  var loader1 = new THREE.CubeTextureLoader();
+  loader1.setPath('../src/img/panorama/')
+  var fileName1 = IMG.view['P' + NUMBER].file
+  scene1.background = loader1.load([
+      fileName1 + '_rt.png', fileName1 + '_lf.png',
+      fileName1 + '_up.png', fileName1 + '_dn.png',
+      fileName1 + '_ft.png', fileName1 + '_bk.png',
+    ],
+    render1
+  );
+  /**
+   * 光源设置
+   */
+  //点光源
+  var point1 = new THREE.PointLight(0xffffff);
+  point1.position.set(100, 100, 100); //点光源位置
+  scene1.add(point1); //点光源添加到场景中
+  //环境光
+  var ambient1 = new THREE.AmbientLight(0x444444);
+  scene1.add(ambient1);
+  /**
+   * 相机设置
+   */
+  var width = window.innerWidth / 2 - 50; //窗口宽度
+  var height = window.innerHeight - 50; //窗口高度
+  var k = width / height; //窗口宽高比
+  var s = 150; //三维场景显示范围控制系数，系数越大，显示的范围越大
+  //创建相机对象
+  var camera1 = new THREE.PerspectiveCamera(60, k, 0.1, 1000);
+  camera1.position.set(1, 0, 0); //设置相机位置
+  camera1.lookAt(scene1.position); //设置相机方向(指向的场景对象)
+  /**
+   * 创建渲染器对象
+   */
+  var renderer1 = new THREE.WebGLRenderer({
+    antialias: true
+  });
+  renderer1.setSize(width, height); //设置渲染区域尺寸
+  renderer1.setClearColor(0xb9d3ff, 1); //设置背景颜色
+  $('.show')[0].appendChild(renderer1.domElement); //body元素中插入canvas对象
+  // 渲染函数
+  function render1() {
+    renderer1.render(scene1, camera1); //执行渲染操作
+  }
+  render1();
+  //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
+  var controls1 = new THREE.OrbitControls(camera1, $('.show')[0]);
+  //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
+  controls1.rotateSpeed = 0.5
+  controls1.enableKeys = false
+  controls1.addEventListener('change', render1);
+
+  /** ————————————————————————————————————————————————————————————割———————————————————————————————————————————————————————————————————— **/
+
+  /**
+   * 创建场景对象Scene
+   */
+  var scene2 = new THREE.Scene();
+  var loader2 = new THREE.CubeTextureLoader();
+  loader2.setPath('../src/img/panorama/')
+  var fileName2 = IMG.view['P' + previewNum].file
+  scene2.background = loader2.load([
+      fileName2 + '_rt.png', fileName2 + '_lf.png',
+      fileName2 + '_up.png', fileName2 + '_dn.png',
+      fileName2 + '_ft.png', fileName2 + '_bk.png',
+    ],
+    render2
+  );
+  /**
+   * 光源设置
+   */
+  //点光源
+  var point2 = new THREE.PointLight(0xffffff);
+  point2.position.set(100, 100, 100); //点光源位置
+  scene2.add(point2); //点光源添加到场景中
+  //环境光
+  var ambient2 = new THREE.AmbientLight(0x444444);
+  scene2.add(ambient2);
+  /**
+   * 相机设置
+   */
+  var width = window.innerWidth / 2 - 50; //窗口宽度
+  var height = window.innerHeight - 50; //窗口高度
+  var k = width / height; //窗口宽高比
+  var s = 150; //三维场景显示范围控制系数，系数越大，显示的范围越大
+  //创建相机对象
+  var camera2 = new THREE.PerspectiveCamera(60, k, 0.1, 1000);
+  camera2.position.set(1, 0, 0); //设置相机位置
+  camera2.lookAt(scene2.position); //设置相机方向(指向的场景对象)
+  /**
+   * 创建渲染器对象
+   */
+  var renderer2 = new THREE.WebGLRenderer({
+    antialias: true
+  });
+  renderer2.setSize(width, height); //设置渲染区域尺寸
+  renderer2.setClearColor(0xb9d3ff, 1); //设置背景颜色
+  $('.show')[1].appendChild(renderer2.domElement); //body元素中插入canvas对象
+  // 渲染函数
+  function render2() {
+    renderer2.render(scene2, camera2); //执行渲染操作
+  }
+  render2();
+  //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
+  var controls2 = new THREE.OrbitControls(camera2, $('.show')[1]);
+  //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
+  controls2.rotateSpeed = 0.5
+  controls2.maxPolarAngle = Math.PI / 2
+  controls2.minPolarAngle = Math.PI / 2
+  controls2.addEventListener('change', function () {
+    render2();
+    $("#deflection").val(function () {
+      let position = JSON.parse(JSON.stringify(camera2.position))
+      position.x = parseInt(position.x * 100) / 100
+      position.y = parseInt(position.y * 100) / 100
+      position.z = parseInt(position.z * 100) / 100
+      return JSON.stringify(position)
+    })
+  });
+  var spriteMap = new THREE.TextureLoader().load("direction.png");
+  var spriteMaterial = new THREE.SpriteMaterial({
+    map: spriteMap,
+    color: 0xffffff
+  });
+  var spriteMapAdd = new THREE.TextureLoader().load("add.png");
+  var spriteMaterialAdd = new THREE.SpriteMaterial({
+    map: spriteMapAdd,
+    color: 0xffffff
+  });
+  var spriteAdd = new THREE.Sprite(spriteMaterialAdd);
+  spriteAdd.scale.set(0.3, 0.3, 0.3)
+  scene1.add(spriteAdd);
+
+  /** ————————————————————————————————————————————————————————————割———————————————————————————————————————————————————————————————————— **/
+  bind();
+  reload(1)
+
+  function bind() {
+    $("input").on("click", function (e) {
+      e.target.focus();
+    })
+    $("input").on("mousedown", function () {
+      controls1.enabled = false
+    })
+    $("input").on("mouseup", function () {
+      controls1.enabled = true
+    })
+    $("#goto").on("click", function () {
+      NUMBER = $("#num").val();
+      reload(NUMBER)
+    })
+    $("#previous").on("click", function () {
+      if (NUMBER == 1) {
+        alert("没了")
+        return;
+      }
+      $("#num").val(--NUMBER)
+      reload(NUMBER)
+    })
+    $("#next").on("click", function () {
+      if (NUMBER == 282) {
+        alert("没了")
+        return;
+      }
+      $("#num").val(++NUMBER)
+      reload(NUMBER)
+    })
+    $("#save").on("click", function () {
+      // console.log(IMG)
+      // $.post('http://127.0.0.1:3160/record', {
+      //   data: JSON.stringify(IMG)
+      // }, (data) => {
+      //   console.log(data)
+      // })
+      console.log(IMG)
+    });
+    $("#tag").on("change", function () {
+      viewOne.type = $("#tag").checked ? "repeat" : "plain"
+    })
+    $("#visibleChange").on("click", function () {
+      let nums = JSON.parse($("#visibleNum").val())
+      if (!Array.isArray(nums)) {
+
+        alert("格式错误")
+        return;
+      }
+      viewOne.visible = nums
+      reload(NUMBER)
+    })
+    $(".preview").each((i, e) => {
+      e.addEventListener("click", function (e) {
+        previewNum = e.target.innerText;
+        changeScene(scene2, loader2, previewNum, render2)
+      })
+    });
+    $(".direction").each((i, e) => {
+      e.addEventListener("click", function () {
+        if (scene1.getObjectByName(NUMBER + "&" + $(".lable > label")[i].innerText)) {
+          scene1.getObjectByName(NUMBER + "&" + $(".lable > label")[i].innerText).position.set(-camera1.position
+            .x * 10, -camera1
+            .position.y * 10, -camera1.position.z * 10);
+          (viewOne.TargetOffset)[$(".lable > label")[i].innerText].x = -camera1.position.x * 10;
+          (viewOne.TargetOffset)[$(".lable > label")[i].innerText].y = -camera1.position.y * 10;
+          (viewOne.TargetOffset)[$(".lable > label")[i].innerText].z = -camera1.position.z * 10;
+          render1();
+          return;
+        }
+        var sprite = new THREE.Sprite(spriteMaterial);
+        sprite.position.set(-camera1.position.x * 10, -camera1.position.y * 10, -camera1.position.z * 10)
+        sprite.name = NUMBER + "&" + $(".lable > label")[i].innerText;
+        scene1.add(sprite);
+        if (!viewOne.TargetOffset) {
+          viewOne.TargetOffset = {}
+        }
+        if (!(viewOne.TargetOffset)[$(".lable > label")[i].innerText]) {
+          (viewOne.TargetOffset)[$(".lable > label")[i].innerText] = {}
+        }
+        (viewOne.TargetOffset)[$(".lable > label")[i].innerText].x = -camera1.position.x * 10;
+        (viewOne.TargetOffset)[$(".lable > label")[i].innerText].y = -camera1.position.y * 10;
+        (viewOne.TargetOffset)[$(".lable > label")[i].innerText].z = -camera1.position.z * 10;
+        render1();
+      })
+    })
+    $(".size").each((i, e) => {
+      e.addEventListener("mousedown", function () {
+        controls1.enabled = false
+      })
+      e.addEventListener("change", function (ele) {
+        let point = scene1.getObjectByName(NUMBER + "&" + $(".lable > label")[i].innerText)
+        point.scale.set(ele.target.value, ele.target.value, ele.target.value);
+
+        if (!viewOne.TargetOffset) {
+          viewOne.TargetOffset = {}
+        }
+        if (!(viewOne.TargetOffset)[$(".lable > label")[i].innerText]) {
+          (viewOne.TargetOffset)[$(".lable > label")[i].innerText] = {}
+        }
+        (viewOne.TargetOffset)[$(".lable > label")[i].innerText].size = ele.target.value
+        render1()
+      })
+      e.addEventListener("mouseup", function () {
+        controls1.enabled = true
+      })
+    })
+    $("#SaveDeflection").on("click", function () {
+      if (!viewOne.TargetOffset) viewOne.TargetOffset = {};
+      if (!(viewOne.TargetOffset)[previewNum])(viewOne.TargetOffset)[previewNum] = {};
+      (viewOne.TargetOffset)[previewNum].direction = camera2.position
+      $(".preview").each((i, e) => {
+        if (e.innerText == previewNum) {
+          e.nextElementSibling.checked = true
+        }
+      })
+    })
+
+  }
+
+  function reload(num) {
+    NUMBER = num
+    viewOne = IMG.view["P" + NUMBER]
+    previewNum = viewOne.visible[0]
+
+    let preHtml = ""
+    let pointHtml = ""
+    $("*").unbind()
+    $("#tag").checked = viewOne.type == "repeat"
+
+    $("#visibleNum").val(JSON.stringify(viewOne.visible))
+    let rem = []
+    for (let i = 0; i < scene1.children.length; i++) {
+      if (scene1.children[i].type == "Sprite" && scene1.children[i].name != "") {
+        rem.push(scene1.children[i])
+      }
+    }
+    scene1.remove(...rem)
+    viewOne.visible.forEach(e => {
+      let check = ""
+      if (viewOne.TargetOffset) {
+        if ((viewOne.TargetOffset)[e]) {
+          check = "checked='checked'"
+        }
+      }
+      preHtml += ` <button class="preview">${e}</button><input type="checkbox" ${
+        check
+      }  name="" id=""><br>`
+      
+      if (viewOne.TargetOffset) {
+        if ((viewOne.TargetOffset)[e]) {
+          let position = (viewOne.TargetOffset)[e]
+          var sprite = new THREE.Sprite(spriteMaterial);
+          sprite.position.set(position.x, position.y, position.z);
+          let size = (viewOne.TargetOffset)[e].size || 1;
+          sprite.scale.set(size,size,size)
+          sprite.name = NUMBER + "&" + e
+          scene1.add(sprite);
+        }
+      }
+
+      let range = ""
+      if (viewOne.TargetOffset) {
+        if ((viewOne.TargetOffset)[e]) {
+           range = (viewOne.TargetOffset)[e].size || 1
+        }
+      }
+      
+        pointHtml += `
+          <button class="direction">插入指向</button>
+          <div class="lable">
+            <label>${e}</label><input class="size" type="range" value="${range}" max="1.8" min="0.2" step="0.05">
+          </div>
+          <br>`
+    });
+    $("#preview").html(preHtml)
+    $("#point").html(pointHtml)
+    bind();
+    changeScene(scene1, loader1, NUMBER, render1);
+    changeScene(scene2, loader2, previewNum, render2);
+    if (viewOne.TargetOffset) {
+      if (viewOne.TargetOffset[previewNum]) {
+        if (viewOne.TargetOffset[previewNum].direction) {
+
+          let direction = viewOne.TargetOffset[previewNum].direction
+          camera2.position.set(direction.x, direction.y, direction.z)
+        }
+      }
+    }
+  }
+
+  function changeScene(scene, loader, num, render) {
+    let fileName = IMG.view["P" + num].file
+    scene.background = loader.load([
+        fileName + '_rt.png', fileName + '_lf.png',
+        fileName + '_up.png', fileName + '_dn.png',
+        fileName + '_ft.png', fileName + '_bk.png',
+      ],
+      render
+    );
+  }
+</script>
+<script>
+  // $.post('http://127.0.0.1:3160/record', {
+  //   data: JSON.stringify(data)
+  // }, (data) => {
+  //   console.log(data)
+  // })
+</script>
+
+</html>

@@ -1,0 +1,109 @@
+@media screen and (max-height: 600px) {
+  .stone-form-entry {
+    height: 300px;
+    width: 240px;
+    top: 100px;
+  }
+}
+
+@media screen and (min-height: 600px) {
+  .stone-form-entry {
+    height: 46vh;
+    width: 36vh;
+    top: 25vh;
+  }
+}
+
+.stone-form-entry {
+  position: fixed;
+  right: calc(50vw - 20vh);
+  background-color: rgba(0, 0, 0, 0.5);
+  border: black 1px solid;
+  border-radius: 2vh;
+  z-index: 5000;
+  padding: 2vh;
+  transition: all 0.5s;
+  /* visibility: hidden */
+}
+.stone-form-entry.hidden{
+  top: 0;
+  right: 0;
+  transform: scale(0,0)
+}
+
+.stone-form-entry:before {
+  content: "";
+  position: absolute;
+  left: calc(-50vw + 20vh);
+  top: -26vh;
+  width: 101vw;
+  height: 101vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1
+}
+
+.stone-form-entry .stone-btn,
+.stone-form-input {
+  height: 10%;
+  background-color: rgba(0, 0, 0, 0);
+  padding: 2px 5px;
+  border: none;
+  color: whitesmoke;
+  font-size: 2.8vh;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  background-size: auto 75%;
+  background-repeat: no-repeat;
+  padding-left: 5px;
+}
+
+.stone-form-input {
+  border-bottom: rgba(255, 255, 255, 0.6) 1px solid;
+  caret-color: white;
+  width: 65%;
+}
+
+.stone-form-input:focus {
+  border-bottom-color: white
+}
+.stone-btn{
+  cursor: pointer;
+}
+.stone-btn:active {
+  opacity: 0.5
+}
+
+.entry-close {
+  width: 12.5%;
+  border: 1px whitesmoke solid !important;
+  margin-left: 85%
+}
+
+.entry-getcode {
+  float: right;
+  width: 20%;
+  padding: 5px 5px !important;
+  font-size: 14px !important;
+  background-color: rgba(100, 100, 100, 0.7) !important;
+  background-size: 100% 100% !important;
+  background-position: center center;
+  transform: scale(1.2,1.2);
+  font-weight: 100;
+  border-radius: 3px;
+}
+
+.stone-btn.plain {
+  height: calc(10% + 10px) !important;
+  padding: 5px 20px !important;
+  border-radius: calc(10% + 20px);
+  border-width: 1px;
+  border-style: solid;
+}
+
+.entry-sub {
+  border-color: white !important;
+  width: 40%;
+  margin-left: 30%;
+  margin-top: 8% !important;
+  font-weight: lighter
+}

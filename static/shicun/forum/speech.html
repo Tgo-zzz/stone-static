@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>speech</title>
+</head>
+<script src="../userEntry/js/init.js"></script>
+<style>
+  .box {
+    position: absolute;
+    width: 500px;
+    min-height: 210px;
+    top: calc(50% - 120px);
+    left: calc(50% - 250px);
+    background: white;
+    border-radius: 5px;
+    padding: 20px 10px;
+  }
+
+  .portrait {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    border: 2px whitesmoke solid;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center center;
+    float: left;
+  }
+
+  #content {
+    display: inline-block;
+    width: calc(100% - 84px);
+    height: calc(100% - 50px);
+    border: none;
+    font-size: 24px;
+    outline: none;
+  }
+
+  .submit {
+    position: absolute;
+    height: 40px;
+    width: 70px;
+    padding: 5px 10px;
+    background: #D7CCAE;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    bottom: 20px;
+    right: 40px;
+    cursor: pointer;
+  }
+
+  .anonymity {
+    position: absolute;
+    height: 40px;
+    width: 70px;
+    padding: 5px 10px;
+    background: #D7CCAE;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    bottom: 20px;
+    left: 40px;
+    cursor: pointer;
+  }
+
+  #close {
+    display: block;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    right: -60px;
+    top: 20px;
+    background: center center url("./img/close.png") no-repeat;
+    background-size: cover;
+    cursor: pointer;
+  }
+
+  #close:hover {
+    opacity: 0.5;
+  }
+
+  .submit:hover {
+    opacity: 0.5;
+  }
+
+  .anonymity:hover {
+    opacity: 0.5;
+  }
+</style>
+
+<body>
+  <div class="box">
+    <span class="portrait"></span>
+    <form action="http://localhost:3160/record/question" onsubmit="return Aclose(event)" method="POST">
+      <textarea name="question" required rows="4" id="content" placeholder="写下你的问题"></textarea>
+      <input class="anonymity " id="" type="button" value="匿&nbsp;名">
+      <button class="submit" id="submit1" type="submit">提&nbsp;问</button>
+    </form>
+    <span id="close"></span>
+  </div>
+  <div class="box">
+    <span class="portrait"></span>
+    <form action="http://localhost:3160/record/answer" onsubmit="return Bclose(event)" method="POST">
+      <textarea name="question" required rows="4" id="content" placeholder="在这儿回答哦"></textarea>
+      <input class="anonymity " type="button" value="匿&nbsp;名">
+      <button class="submit" id="submit2" type="submit">提&nbsp;交</button>
+    </form>
+  </div>
+</body>
+<script>
+  document.getElementById("close").addEventListener("click", function () {
+    parent.closeIframe();
+  })
+
+  document.getElementsByClassName("portrait")[0].style.backgroundImage = `url(http://localhost:3160/data/por/${client.por})`
+  document.getElementsByClassName("portrait")[1].style.backgroundImage = `url(http://localhost:3160/data/por/${client.por})`
+
+  function Aclose(e) {
+    var req = new XMLHttpRequest()
+    req.onreadystatechange = function () {
+      if (req.readyState == 4 && req.status == 200) {
+        var res = JSON.parse(req.responseText);
+        if(res.code == 1){
+          window.parent.closeIframe(true);
+        }
+      }
+    }
+    req.withCredentials = true;
+    req.contentType = 'application / json; charset = utf-8'
+    req.open('post', e.target.action);
+    req.send(JSON.stringify({
+      question: document.getElementsByTagName("textarea")[0].value || document.getElementsByTagName("textarea")[1]
+        .value
+    }));
+    return false
+  };
+  function Bclose(e) {
+    var req = new XMLHttpRequest()
+    req.onreadystatechange = function () {
+      if (req.readyState == 4 && req.status == 200) {
+        var res = JSON.parse(req.responseText);
+        if(res.code == 1){
+          window.parent.closeIframe(true);
+        }
+      }
+    }
+    req.withCredentials = true;
+    req.open('post', e.target.action+window.parent.location.search);
+    req.send(JSON.stringify({
+      answer: document.getElementsByTagName("textarea")[0].value || document.getElementsByTagName("textarea")[1]
+        .value
+    }));
+    return false
+  };
+  ! function init() {
+    let href = location.href.split("#")[1]
+    switch (href) {
+      case "question":
+        document.getElementsByClassName("box")[0].style.zIndex = "10"
+        break;
+    }
+  }();
+</script>
+
+</html>

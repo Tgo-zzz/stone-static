@@ -1,0 +1,74 @@
+newmtl blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd mubang.jpg
+Ni 1.00
+Ks 0.00 0.00 0.00
+newmtl blinn2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd ֧qingshi1_DIFFUSE.jpg
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl blinn3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd WoodEnds0084_3_M.jpg
+Ni 1.00
+Ks 0.00 0.00 0.00
+newmtl blinn4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd AI_27_05_Wood_Lamps.jpg
+Ni 1.00
+Ks 0.12 0.12 0.12
+newmtl initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl shimo:Box006SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd PlywoodOld0048_2_M.jpg
+Ni 1.00
+Ks 0.03 0.03 0.03
+Ns 14.00
+newmtl shimo:Cylinder005SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+map_Kd WoodPlanksBare0012_1_S.jpg
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl shimo:Cylinder005SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+map_Kd WoodEnds0055_M.jpg
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl shimo:Cylinder006SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd qingshi_DIFFUSE.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 14.00

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>register</title>
+  <link rel="stylesheet" href="./css/entry.css">
+  <script src="./js/securityCode.js"></script>
+</head>
+<script src="../userEntry/js/init.js"></script>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    outline: none;
+  }
+
+  #tel {
+    padding-left: 10%;
+    background-image: url("./icon/tel.png")
+  }
+
+  #verifyCode {
+    padding-left: 10%;
+    background-image: url("./icon/code.png")
+  }
+
+  #password {
+    padding-left: 10%;
+    background-image: url("./icon/ps.png")
+  }
+</style>
+
+<body>
+  <form class="stone-form-entry" action="http://127.0.0.1:3160/record" method="POST">
+    <input type="button" class="stone-btn entry-close" value="&times;">
+    <br>
+    <input id="tel" name="tel" class="stone-form-input" type="tel" required="required" placeholder="&nbsp;手机号"
+      pattern="0?(13|14|15|18|17)[0-9]{9}" title="(请输入11位手机号码)">
+
+    <input id="verifyCode" name="verifyCode" class="stone-form-input" type="text" required="required"
+      placeholder="&nbsp;验证码">
+    <input id="getcode" type="button" class="stone-btn entry-getcode" value="获&nbsp;取">
+
+    <input id="password" name="password" class="stone-form-input" type="password" required="required"
+      placeholder="&nbsp;密码">
+    <br>
+    <button class="stone-btn plain entry-sub" type="submit">注&nbsp;册</button><i>&nbsp;<a href="./login.html" style="color: rgba(255,255,255,0.5)">登录?</a>&nbsp;</i>
+  </form>
+</body>
+<script src="./js/userEnry.js"></script>
+</html>

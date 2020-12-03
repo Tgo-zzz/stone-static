@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>二维柏林噪声</title>
+</head>
+
+<body>
+  <canvas id="noise"></canvas>
+</body>
+<script>
+
+  // 存留bug
+
+  //种子
+  Math.seed = 10;
+
+  // 种子生成随机数
+  Math.seededRandom = function (max, min) {
+    max = max || 1;
+    min = min || 0;
+    Math.seed = (Math.seed * 9301 + 49297) % 233280;
+    var rnd = Math.seed / 233280.0;
+    return min + rnd * (max - min)
+  };
+  // 二维向量点积
+  Math.dot = function (vector1, vector2) {
+    return vector1.x * vector2.x + vector1.y * vector2.y
+  }
+
+  let canvas = document.getElementById('noise')
+  canvas.height = 900
+  canvas.width = 1500
+  let ctx = canvas.getContext('2d')
+
+  let noise = Noise({
+    x: 1500,
+    y: 900
+  }, {
+    x: 30,
+    y: 30
+  });
+
+  noise.forEach((a, x) => {
+    a.forEach((b, y) => {
+      draw(x, y, b)
+    })
+  });
+
+  function Noise(OverSquare, density, persistence = 1, octaves = 1, amplitude = 1, parentNoise) {
+    // OverSquare 总方形：{x，y}
+    // density 密度
+    // persistence 持续度
+    // octaves 倍频
+    // amplitude 振幅
+    // parentNoise 上一级噪声
+    // 获取波长
+    let unitSquare = {
+      x: parseInt(OverSquare.x / density.x),
+      y: parseInt(OverSquare.y / density.y)
+    }
+    let Znoise = []
+    let noise = []
+
+    // 条件判断
+    if (  density.x < 2 || density.y < 2) {
+      console.warn("频率过低")
+      return;
+    }
+    if (unitSquare.x < 1 || unitSquare.y < 1) {
+      console.log("单位点精度不足，已返回柏林噪声，当前倍频：" + octaves);
+      return;
+    }
+    if (octaves == 0) {
+      console.log("柏林噪声计算完毕")
+      return;
+    } else {
+      octaves--
+    }
+
+
+    // 生成晶格噪点
+    let G = []
+    for (let k = 0; k < 512; k++) {
+      do {
+        G[k] = {
+          x: Math.seededRandom(amplitude) * 2 - 1,
+          y: Math.seededRandom(amplitude) * 2 - 1
+        }
+      }
+      while (G[k].x * G[k].x + G[k].y * G[k].y > 1)
+    }
+
+    for (let i = 0; i < OverSquare.x; i += unitSquare.x) {
+      Znoise[i] = []
+      for (let j = 0; j < OverSquare.y; j += unitSquare.y) {
+        Znoise[i][j] = parseInt(Math.seededRandom(amplitude) * 512)
+      }
+      Znoise[i][OverSquare.y] = parseInt(Math.seededRandom(amplitude) * 512)
+    }
+    Znoise[OverSquare.x] = []
+    for (let j = 0; j < OverSquare.y; j += unitSquare.y) {
+      Znoise[OverSquare.x][j] = parseInt(Math.seededRandom(amplitude) * 512)
+    }
+    Znoise[OverSquare.x][OverSquare.y] = parseInt(Math.seededRandom(amplitude) * 512)
+
+    // 插值计算
+    let n = [
+      [],
+      []
+    ]
+    for (let i = 0; i < OverSquare.x; i++) {
+      noise[i] = []
+
+      for (let j = 0; j < OverSquare.y; j++) {
+
+        if (j / unitSquare.y % 1 == 0) {
+          n[0][1] = G[Znoise[parseInt(i / unitSquare.x) * unitSquare.x][j + unitSquare.y]]
+          n[1][1] = G[Znoise[parseInt(i / unitSquare.x) * unitSquare.x + unitSquare.x][j + unitSquare.y]]
+          n[0][0] = G[Znoise[parseInt(i / unitSquare.x) * unitSquare.x][j]]
+          n[1][0] = G[Znoise[parseInt(i / unitSquare.x) * unitSquare.x + unitSquare.x][j]]
+        }
+
+        let point = [{
+          x: i / unitSquare.x % 1,
+          y: j / unitSquare.y % 1
+        }, {
+          x: i / unitSquare.x % 1 - 1,
+          y: j / unitSquare.y % 1
+        }, {
+          x: i / unitSquare.x % 1,
+          y: j / unitSquare.y % 1 - 1
+        }, {
+          x: i / unitSquare.x % 1 - 1,
+          y: j / unitSquare.y % 1 - 1
+        }]
+        if (parentNoise) {
+          parentNoise[i][j] = weighting(i / unitSquare.x % 1, j / unitSquare.y % 1, Math.dot(n[0][0], point[0]), Math
+            .dot(n[1][0], point[1]),
+            Math.dot(n[0][1], point[2]), Math.dot(n[1][1], point[3]))
+        } else {
+          noise[i][j] = weighting(i / unitSquare.x % 1, j / unitSquare.y % 1, Math.dot(n[0][0], point[0]), Math.dot(n[1]
+              [0], point[1]),
+            Math.dot(n[0][1], point[2]), Math.dot(n[1][1], point[3]))
+        }
+      }
+
+    }
+
+    Noise(OverSquare, {
+      x: density.x / persistence,
+      y: density.y / persistence
+    }, persistence, octaves, amplitude * persistence, noise)
+
+    return noise
+
+  }
+
+  //  四点加权
+  function weighting(u, v, n00, n10, n01, n11) {
+    let n0 = n00 * (1 - lerp(u)) + n10 * lerp(u)
+    let n1 = n01 * (1 - lerp(u)) + n11 * lerp(u)
+    let n = n0 * (1 - lerp(v)) + n1 * lerp(v)
+    return n
+  }
+  // 平滑插值函数
+  function lerp(u) {
+    return 3 * u * u - 2 * u * u * u
+    // 3 * u * u - 2 * u * u * u
+    //6 * Math.pow(u ,5) - 15 * Math.pow(u ,4) + 10 * u
+  }
+
+  // 绘制单位点
+  function draw(x, y, widget) {
+    ctx.fillStyle = `rgb(${125 * (widget + 1)},${125 * (widget + 1)},${125 * (widget + 1)})`
+    ctx.fillRect(x, y, 1, 1)
+  }
+</script>
+
+</html>

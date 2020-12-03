@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>forum</title>
+  <link rel="stylesheet" href="./src/css/forum-pro.css">
+  <!-- <link rel="stylesheet" href="./src/css/slideBox.css" /> -->
+</head>
+<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+<!-- <script src="./src/js/jquery.SuperSlide.2.1.3.js"></script> -->
+
+<body>
+  <header class="forum-head">
+    <div class="container">
+      <span class="forum-logo">
+        <a href="#"><img src="./src/img/logo.png" alt="logo"></a>
+      </span>
+      <div class="forum-bar">
+        <h2>石村论坛</h2>
+        <ul>
+          <li><a href="#">首页</a></li>
+          <li><a href="#">标签</a></li>
+          <li onclick="showNotice()"><a href="#">通知板</a><i id="notice-show" style="display: none"></i></li>
+          <li><a href="#" id="ask-question" class="ask-question">提&nbsp;&nbsp;&nbsp;&nbsp;问</a></li>
+        </ul>
+      </div>
+      <div class="search">
+        <form action="#" method="GET">
+          <input type="text" name="search" placeholder="Search...">
+          <button type="submit"><i class="btn-icon seek"></i></button>
+        </form>
+      </div>
+      <div class="register">
+        <ul>
+          <li><a class="btn" id="login">登&nbsp;&nbsp;录</a></li>
+          <li><a class="btn" id="reg">注&nbsp;&nbsp;册</a></li>
+          <li style="display: none"><a href="" class="portrait"><img src="" alt="portrait">&nbsp;名字</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="notice" style="display:none">
+      <div class="box">
+        <div class="span1"><a href="#"></a></div>
+        <!-- <div class="span2"><a href="#"></a></div>
+        <div class="span3"><a href="#"></a></div> -->
+      </div>
+      <div class="detail">
+        <div class="line1">
+          <a href="#"> .K </a>给<a href="#"> 老中医包治生发 </a>丢了一枚臭鸡蛋........
+        </div>
+        <div class="line1">
+          <a href="#"> 萝卜鱼 </a> 的提问等 <a href="#"> .K </a> 来回答
+        </div>
+        <div class="line1">
+          <a href="#"> 奴娇 </a>给<a href="#"> 老中医包治生发 </a> 点了个大大的赞
+        </div>
+        <div class="line1">
+          <a href="#"> 斯帕罗 </a>给<a href="#"> 萝卜鱼 </a>评论了两条留言，请查收！
+        </div>
+      </div>
+      <div class="notice-bottom"> <span>全部通知</span> </div>
+    </div>
+  </header>
+
+  <section class="forum-sec">
+    <div class="container">
+      <ul class="ul-inline">
+        <li><a href="#">最&nbsp;新</a></li>
+        <li><a href="#">待解决</a></li>
+        <li><a href="#">今&nbsp;日</a></li>
+        <li><a href="#">本周最热</a></li>
+        <li><a href="#">本月最热</a></li>
+      </ul>
+    </div>
+    <span id="forum-sec-vernier" class="vernier"></span>
+  </section>
+
+  <main class="forum-page">
+    <div class="col-8">
+      <div class="forum-questions">
+        <ul>
+          <li class="forum-user-question">
+            <img src="../../data/por/por_0.jpg" alt="user">
+            <div class="container">
+              <h3 class="question-content">我是问题</h3>
+              <ul class="react-links ul-inline">
+                <li> <i class="react-icon applaud"></i> &nbsp;赞同&nbsp;1</li>
+                <li> <i class="react-icon comment"></i> &nbsp;评论&nbsp;1</li>
+                <li> <i class="react-icon view"></i> &nbsp;浏览&nbsp;1</li>
+              </ul>
+              <br>
+              <ul class="quest-tags ul-inline">
+                <li>java</li>
+                <li>php</li>
+                <li>石村人</li>
+              </ul>
+              <span class="quest-time">时间</span>
+            </div>
+          </li>
+          <li class="forum-user-question">
+            <img src="../../data/por/por_0.jpg" alt="user">
+            <div class="container">
+              <h3 class="question-content">我是问题</h3>
+              <ul class="react-links ul-inline">
+                <li> <i class="react-icon applaud"></i> &nbsp;赞同&nbsp;1</li>
+                <li> <i class="react-icon comment"></i> &nbsp;评论&nbsp;1</li>
+                <li> <i class="react-icon view"></i> &nbsp;浏览&nbsp;1</li>
+              </ul>
+              <br>
+              <ul class="quest-tags ul-inline">
+                <li>java</li>
+                <li>php</li>
+                <li>js</li>
+              </ul>
+              <span class="quest-time">时间</span>
+            </div>
+          </li>
+          <li class="forum-user-question">
+            <img src="../../data/por/por_0.jpg" alt="user">
+            <div class="container">
+              <h3 class="question-content">我是问题</h3>
+              <ul class="react-links ul-inline">
+                <li> <i class="react-icon applaud"></i> &nbsp;赞同&nbsp;1</li>
+                <li> <i class="react-icon comment"></i> &nbsp;评论&nbsp;1</li>
+                <li> <i class="react-icon view"></i> &nbsp;浏览&nbsp;1</li>
+              </ul>
+              <br>
+              <ul class="quest-tags ul-inline">
+                <li>java</li>
+                <li>php</li>
+                <li>js</li>
+              </ul>
+              <span class="quest-time">时间</span>
+            </div>
+          </li>
+          <li class="forum-user-question">
+            <img src="../../data/por/por_0.jpg" alt="user">
+            <div class="container">
+              <h3 class="question-content">我是问题</h3>
+              <ul class="react-links ul-inline">
+                <li> <i class="react-icon applaud"></i> &nbsp;赞同&nbsp;1</li>
+                <li> <i class="react-icon comment"></i> &nbsp;评论&nbsp;1</li>
+                <li> <i class="react-icon view"></i> &nbsp;浏览&nbsp;1</li>
+              </ul>
+              <br>
+              <ul class="quest-tags ul-inline">
+                <li>java</li>
+                <li>php</li>
+                <li>本地人</li>
+              </ul>
+              <span class="quest-time">时间</span>
+            </div>
+          </li>
+          <li class="forum-user-question">
+            <img src="../../data/por/por_0.jpg" alt="user">
+            <div class="container">
+              <h3 class="question-content">我是问题</h3>
+              <ul class="react-links ul-inline">
+                <li> <i class="react-icon applaud"></i> &nbsp;赞同&nbsp;1</li>
+                <li> <i class="react-icon comment"></i> &nbsp;评论&nbsp;1</li>
+                <li> <i class="react-icon view"></i> &nbsp;浏览&nbsp;1</li>
+              </ul>
+              <br>
+              <ul class="quest-tags ul-inline">
+                <li>java</li>
+                <li>php</li>
+                <li>本地人</li>
+              </ul>
+              <span class="quest-time">时间</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <nav class="pagination">
+        <ul class="page-list ul-inline">
+          <a href="#">
+            <li class="active"> 上一页 </li>
+          </a>
+          <a href="#">
+            <li> 1 </li>
+          </a>
+          <a href="#">
+            <li> 2 </li>
+          </a>
+          <a href="#">
+            <li> 3 </li>
+          </a>
+          <a href="#">
+            <li> 4 </li>
+          </a>
+          <a href="#">
+            <li> 5 </li>
+          </a>
+          <a href="#">
+            <li> ... </li>
+          </a>
+          <a href="#">
+            <li> 下一页 </li>
+          </a>
+        </ul>
+      </nav>
+    </div>
+    <div class="col-4">
+      <div class="forum-widget-users">
+        <h2> 石村论坛贡献榜 </h2>
+        <ul>
+          <a href="">
+            <li class="widget-user">
+              <img src="../../data/por/por_0.jpg" alt="user">
+              <div class="user-infor">
+                <h3>name</h3>
+                <h3>简介</h3>
+              </div>
+              <span class="widget">23121</span>
+            </li>
+          </a>
+          <a href="">
+            <li class="widget-user">
+              <img src="../../data/por/por_0.jpg" alt="user">
+              <div class="user-infor">
+                <h3>name</h3>
+                <h3>简介</h3>
+              </div>
+              <span class="widget">17131</span>
+            </li>
+          </a>
+          <a href="">
+            <li class="widget-user">
+              <img src="../../data/por/por_0.jpg" alt="user">
+              <div class="user-infor">
+                <h3>name</h3>
+                <h3>简介</h3>
+              </div>
+              <span class="widget">12131</span>
+            </li>
+          </a>
+          <a href="">
+            <li class="widget-user">
+              <img src="../../data/por/por_0.jpg" alt="user">
+              <div class="user-infor">
+                <h3>name</h3>
+                <h3>简介</h3>
+              </div>
+              <span class="widget">9999</span>
+            </li>
+          </a>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <ul class="ul-inline">
+      <li><a href="#" title="">帮助</a></li>
+      <li><a href="#" title="">隐私策略</a></li>
+      <li><a href="#" title="">社区原则</a></li>
+      <li><a href="#" title="">划水政策</a></li>
+      <li><a href="#" title="">我们</a></li>
+      <li><a href="#" title="">论坛</a></li>
+      <li><a href="#" title="">语言</a></li>
+      <li><a href="#" title="">版权相关</a></li>
+    </ul>
+    <p><img src="./src/img/icon/copyright.png" alt="">&nbsp;版权 2019</p>
+    <img src="./src/img/logo.png" alt="logo">&nbsp;石村论坛
+  </footer>
+
+  <div id="question-box" class="question-box" style="display: none;">
+    <div class="overview-edit">
+      <h3>发表帖子</h3>
+      <form action="" method="POST">
+        <input type="text" name="question" required placeholder="标题">
+        <input type="text" name="tags" placeholder="标签：#路线 #旅志">
+        <textarea placeholder="描述..." name="describe"></textarea>
+        <button type="submit" id="save">提 交</button>
+        <button type="submit" id="cancel">取 消</button>
+      </form>
+      <a href="#" title="关闭" id="close-box" class="close-box"><i class="la la-close"></i></a>
+    </div>
+  </div>
+  <iframe id="entry" style="position: fixed;width: 100vw;height: 100vh;top: 0;left: 0;visibility: hidden" src="../userEntry/login.html" frameborder="0"></iframe>
+</body>
+<script>
+  $(document).ready(function () {
+
+    // 二级导航栏初始化
+    $(".forum-sec .container ul li")[0].click();
+
+    // 发帖相关
+    $("#ask-question").click(function () {
+      $("#question-box").fadeIn();
+    })
+    $("#close-box").click(function () {
+      $("#question-box").fadeOut("fast");
+    })
+    $("#cancel").click(function () {
+      $("#question-box").fadeOut("fast");
+    })
+  })
+
+  function showNotice() {
+
+    // 通知栏
+    if (document.getElementById("notice-show").style.display == "inline-block") {
+      $("#notice-show").hide();
+      $($(".notice")[0]).hide();
+      return;
+    }
+
+    $(".notice")[0].style.display = "block"
+    document.getElementById("notice-show").style.display = "inline-block"
+  }
+
+  function refreshPages(index) {
+
+  }
+
+  function moveVernier(width, left, name) { //移动二级导航游标
+
+    let vernier = $(`${name?name:"#forum-sec-vernier"}`)
+
+    vernier.width(width)
+    vernier.css("left", left)
+  }
+
+  $(".forum-sec .container ul li").each(function (index) { //二级导航点击事件绑定
+
+    this.addEventListener("click", function (e) {
+
+      e = $(e.target)
+
+      let width = e.width()
+      let left = e.offset().left
+
+      moveVernier(width, left);
+      refreshPages(index);
+    })
+  })
+</script>
+<script src="../Public_Assets/js/home.js"></script>
+</html>

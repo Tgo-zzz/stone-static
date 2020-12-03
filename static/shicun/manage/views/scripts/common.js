@@ -1,0 +1,417 @@
+﻿$(document).ready(function () {
+	if ($('.datatable-1').length > 0) {
+		$('.datatable-1').dataTable();
+		$('.dataTables_paginate').addClass('btn-group datatable-pagination');
+		$('.dataTables_paginate > a').wrapInner('<span />');
+		$('.dataTables_paginate > a:first-child').append('<i class="icon-chevron-left shaded"></i>');
+		$('.dataTables_paginate > a:last-child').append('<i class="icon-chevron-right shaded"></i>');
+
+		$('.slider-range').slider({
+			range: true,
+			min: 0,
+			max: 20000,
+			values: [3000, 12000],
+			slide: function (event, ui) {
+				$(this).find('.ui-slider-handle').attr('title', ui.value);
+			},
+		});
+
+		$('#amount').val('$' + $('.slider-range').slider('values', 0) + ' - $' + $('.slider-range').slider('values', 1));
+
+
+		//Graph/Chart index.html
+
+		var d1 = [
+			[0, 1],
+			[1, 14],
+			[2, 5],
+			[3, 4],
+			[4, 5],
+			[5, 1],
+			[6, 3],
+			[7, 5],
+			[8, 5]
+		];
+		var d2 = [
+			[0, 5],
+			[1, 2],
+			[2, 10],
+			[3, 1],
+			[4, 9],
+			[5, 5],
+			[6, 2],
+			[7, 10],
+			[8, 8]
+		];
+
+		var plot = $.plot($('#placeholder2'),
+			[{
+				data: d1,
+				label: 'Profits'
+			}, {
+				data: d2,
+				label: 'Expenses'
+			}], {
+				lines: {
+					show: true,
+					fill: true,
+					/*SWITCHED*/
+					lineWidth: 2
+				},
+				points: {
+					show: true,
+					lineWidth: 5
+				},
+				grid: {
+					clickable: true,
+					hoverable: true,
+					autoHighlight: true,
+					mouseActiveRadius: 10,
+					aboveData: true,
+					backgroundColor: '#fff',
+					borderWidth: 0,
+					minBorderMargin: 25,
+				},
+				colors: ['#55f3c0', '#0db37e', '#b4fae3', '#e0d1cb'],
+				shadowSize: 0
+			});
+
+		function showTooltip(x, y, contents) {
+			$('<div id="gridtip">' + contents + '</div>').css({
+				position: 'absolute',
+				display: 'none',
+				top: y + 5,
+				left: x + 5
+			}).appendTo('body').fadeIn(300);
+		}
+
+		var previousPoint = null;
+		$('#placeholder2').bind('plothover', function (event, pos, item) {
+			$('#x').text(pos.x.toFixed(2));
+			$('#y').text(pos.y.toFixed(2));
+
+			if (item) {
+				if (previousPoint != item.dataIndex) {
+					previousPoint = item.dataIndex;
+
+					$('#gridtip').remove();
+					var x = item.datapoint[0].toFixed(0),
+						y = item.datapoint[1].toFixed(0);
+
+					showTooltip(item.pageX, item.pageY,
+						'x : ' + x + '&nbsp;&nbsp;&nbsp; y : ' + y);
+				}
+			} else {
+				$('#gridtip').remove();
+				previousPoint = null;
+			}
+		});
+	} else {
+		var d1 = [
+			[0, 1],
+			[1, 14],
+			[2, 5],
+			[3, 4],
+			[4, 5],
+			[5, 1],
+			[6, 14],
+			[7, 5],
+			[8, 5]
+		];
+		var d2 = [
+			[0, 5],
+			[1, 2],
+			[2, 10],
+			[3, 1],
+			[4, 9],
+			[5, 5],
+			[6, 2],
+			[7, 10],
+			[8, 8]
+		];
+		// cpu 数据
+		var plot = $.plot($("#placeholder"),
+			[{
+				data: d1,
+				label: "Data A"
+			}, {
+				data: d2,
+				label: "Data B"
+			}], {
+				lines: {
+					show: true,
+					fill: false,
+					lineWidth: 2
+				},
+				points: {
+					show: true,
+					lineWidth: 5
+				},
+				grid: {
+					clickable: true,
+					hoverable: true,
+					autoHighlight: true,
+					mouseActiveRadius: 10,
+					aboveData: true,
+					backgroundColor: "#fafafa",
+					borderWidth: 0,
+					minBorderMargin: 25,
+				},
+				colors: ["#090", "#099", "#609", "#900"],
+				shadowSize: 0
+			});
+
+		var d1 = [
+			[0, 1],
+			[1, 14],
+			[2, 5],
+			[3, 4],
+			[4, 5],
+			[5, 1],
+			[6, 14],
+			[7, 50],
+			[8, 5]
+		];
+		var d2 = [
+			[0, 5],
+			[1, 2],
+			[2, 10],
+			[3, 1],
+			[4, 9],
+			[5, 5],
+			[6, 2],
+			[7, 10],
+			[8, 8]
+		];
+		//  网络状态
+		var plot = $.plot($("#placeholder2"),
+			[{
+				data: d1,
+				label: "Data Y"
+			}, {
+				data: d2,
+				label: "Data X"
+			}], {
+				lines: {
+					show: true,
+					fill: true,
+					/*SWITCHED*/
+					lineWidth: 2
+				},
+				points: {
+					show: true,
+					lineWidth: 5
+				},
+				grid: {
+					clickable: true,
+					hoverable: true,
+					autoHighlight: true,
+					mouseActiveRadius: 10,
+					aboveData: true,
+					backgroundColor: "#fafafa",
+					borderWidth: 0,
+					minBorderMargin: 25,
+				},
+				colors: ["#090", "#099", "#609", "#900"],
+				shadowSize: 0
+			});
+
+			setTimeout(() => {
+				var d1 = [
+					[0, 1],
+					[1, 14],
+					[2, 5],
+					[3, 4],
+					[4, 5],
+					[5, 1],
+					[6, 14],
+					[7, 10],
+					[8, 50]
+				];
+				var d2 = [
+					[0, Math.sin(56)],
+					[1, Math.sin(1)],
+					[2, Math.sin(27)],
+					[3, Math.sin(46)],
+					[4, Math.sin(20)],
+					[5, Math.sin(19)],
+					[6, Math.sin(5)],
+					[7, Math.sin(10)],
+					[8, Math.sin(50)]
+				];
+				//  网络状态
+				var plot = $.plot($("#placeholder2"),
+				[{
+					data: d1,
+					label: "Data Y"
+				}, {
+					data: d2,
+					label: "Data X"
+				}], {
+					lines: {
+						show: true,
+						fill: true,
+						/*SWITCHED*/
+						lineWidth: 2
+					},
+					points: {
+						show: true,
+						lineWidth: 5
+					},
+					grid: {
+						clickable: true,
+						hoverable: true,
+						autoHighlight: true,
+						mouseActiveRadius: 10,
+						aboveData: true,
+						backgroundColor: "#fafafa",
+						borderWidth: 0,
+						minBorderMargin: 25,
+					},
+					colors: ["#090", "#099", "#609", "#900"],
+					shadowSize: 0
+				});
+			}, 2000);
+
+		function showTooltip(x, y, contents) {
+			$('<div id="gridtip">' + contents + '</div>').css({
+				position: 'absolute',
+				display: 'none',
+				top: y + 5,
+				left: x + 5
+			}).appendTo("body").fadeIn(300);
+		}
+
+		var previousPoint = null;
+		$("#placeholder2").bind("plothover", function (event, pos, item) {
+			$("#x").text(pos.x.toFixed(2));
+			$("#y").text(pos.y.toFixed(2));
+
+			if (item) {
+				if (previousPoint != item.dataIndex) {
+					previousPoint = item.dataIndex;
+
+					$("#gridtip").remove();
+					var x = item.datapoint[0].toFixed(0),
+						y = item.datapoint[1].toFixed(0);
+
+					showTooltip(item.pageX, item.pageY,
+						"x : " + x + "&nbsp;&nbsp;&nbsp; y : " + y);
+				}
+			} else {
+				$("#gridtip").remove();
+				previousPoint = null;
+			}
+		});
+
+		// PREDEFINED DATA
+		var data_1 = [{
+				label: "Series1",
+				data: [
+					[1, 100]
+				]
+			},
+			{
+				label: "Series2",
+				data: [
+					[1, 30]
+				]
+			},
+			{
+				label: "Series3",
+				data: [
+					[1, 90]
+				]
+			}
+		];
+		var data_2 = [{
+				label: "Series1",
+				data: [
+					[1, 100]
+				]
+			},
+			{
+				label: "Series2",
+				data: [
+					[1, 30]
+				]
+			},
+			{
+				label: "Series3",
+				data: [
+					[1, 300]
+				]
+			}
+		];
+		var data_3 = [{
+				label: "Series1",
+				data: [
+					[1, 100]
+				]
+			},
+			{
+				label: "Series2",
+				data: [
+					[1, 30]
+				]
+			},
+			{
+				label: "Series3",
+				data: [
+					[1, 90]
+				]
+			}
+		];
+
+		// DEFAULT
+		$.plot($("#pie-default"), data_1, {
+			series: {
+				pie: {
+					show: true
+				}
+			}
+		});
+
+		// DEFINE ACTIONS FOR pieHover & pieClick
+		function pieHover(event, pos, obj) {
+			if (!obj)
+				return;
+			percent = parseFloat(obj.series.percent).toFixed(2);
+			$("#hover").html('<span>' + obj.series.label + ' - ' + percent + '%</span>');
+		}
+
+		function pieClick(event, pos, obj) {
+			if (!obj)
+				return;
+			percent = parseFloat(obj.series.percent).toFixed(2);
+			alert('' + obj.series.label + ': ' + percent + '%');
+		}
+
+		// DONUT
+		$.plot($("#pie-donut"), data_2, {
+			series: {
+				pie: {
+					innerRadius: 50,
+					show: true
+				}
+			}
+		});
+
+		// DONUT + INTERACTIVE
+		$.plot($("#pie-interactive"), data_3, {
+			series: {
+				pie: {
+					innerRadius: 50,
+					show: true
+				}
+			},
+			grid: {
+				hoverable: true,
+				clickable: true
+			}
+		});
+
+		$("#pie-interactive").bind("plothover", pieHover);
+		$("#pie-interactive").bind("plotclick", pieClick);
+	}
+});
